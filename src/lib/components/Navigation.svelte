@@ -25,14 +25,14 @@
     },
   ]
 
-  let isActive = true
+  let isActive = false
 
   function toggleNav() {
     isActive = !isActive
   }
 </script>
 
-<nav>
+<nav class:active={isActive}>
   <div class="container">
     <!-- Logo -->
     <a href="/" class="logo">
@@ -65,7 +65,10 @@
     </ul>
 
     <!-- Toggle -->
-    <button class="toggle" aria-label="Toggle" class:active={isActive} on:click={toggleNav}
-      ><span /></button>
+    <button class="toggle" aria-label="Toggle" class:active={isActive} on:click={toggleNav}>
+      <span />
+      <span />
+      <span />
+    </button>
   </div>
 </nav>
