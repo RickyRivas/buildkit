@@ -1,29 +1,7 @@
 <script>
   import "$styles/nav.less"
+  import { pages } from "$lib/config"
   import { page } from "$app/stores"
-
-  export const pages = [
-    {
-      name: "Home",
-      path: "/",
-    },
-    {
-      name: "About",
-      path: "/about",
-    },
-    {
-      name: "services",
-      path: "/services",
-    },
-    {
-      name: "Faq",
-      path: "/faq",
-    },
-    {
-      name: "Contact",
-      path: "/contact",
-    },
-  ]
 
   let isActive = false
 
@@ -52,7 +30,7 @@
       </svg>
     </a>
 
-    <!-- Nav links-->
+    <!-- Nav links -->
     <ul class="nav-links" class:active={isActive}>
       {#each pages as { name, path }}
         <li class="nav-link">
