@@ -24,3 +24,29 @@ body {
 main {
   min-height: 100vh;
 }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/* ===============================================
+	.screenreader 
+	a11y support for descriptive text on vaguely worded buttons
+	https://gomakethings.com/hidden-content-for-better-a11y/#hidden-labels
+=============================================== */
+.screenreader {
+  white-space: nowrap;
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}

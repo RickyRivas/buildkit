@@ -36,6 +36,25 @@ export const pages = [
         metaDescription: "",
     },
 ]
+
+// 3 main services 
+export const services = [
+    {
+        name: 'Screen Printing',
+        description: `Talk about the service with keywords people will be searching for it by. Keep it 1-2
+						sentences.`
+    },
+    {
+        name: 'Embroidery',
+        description: `Talk about the service with keywords people will be searching for it by. Keep it 1-2
+						sentences.`
+    },
+    {
+        name: 'Direct to Film',
+        description: `Talk about the service with keywords people will be searching for it by. Keep it 1-2
+						sentences.`
+    }
+]
 export const businessHours = {
     monday: '',
     tuesday: '',
