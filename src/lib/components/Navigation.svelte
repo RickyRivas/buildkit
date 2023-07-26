@@ -8,9 +8,14 @@
   function toggleNav() {
     isActive = !isActive
   }
+
+  // add class to header when user scrolls 100px
+  let y
 </script>
 
-<nav class:active={isActive}>
+<svelte:window bind:scrollY={y} />
+
+<nav class:active={isActive} class={y >= 100 ? "scroll" : ""}>
   <div class="container">
     <!-- Logo -->
     <a href="/" class="logo">
