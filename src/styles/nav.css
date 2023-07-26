@@ -143,7 +143,7 @@ nav .container .nav-links.active {
   transform: translateX(0%);
 }
 nav .container .toggle {
-  display: inline-block;
+  display: block;
   position: relative;
   font: inherit;
   border: 0;
@@ -166,35 +166,37 @@ nav .container .toggle span {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) rotate(0) scaleX(1);
   background-color: #212121;
-  transition: transform 0.33s ease, width 0.33s ease, left 0.33s ease, top 0.33s ease;
 }
 nav .container .toggle span:nth-child(1) {
   top: 38%;
   left: 43%;
   width: 1.5em;
+  transition: transform 0.33s ease, left 0.33s ease, top 0.33s ease;
 }
 nav .container .toggle span:nth-child(2) {
   transform-origin: left;
+  transition: width 0.33s ease, transform 0.33s ease;
 }
 nav .container .toggle span:nth-child(3) {
   top: 62%;
   left: 43%;
   width: 1.5em;
+  transition: transform 0.33s ease, left 0.33s ease, top 0.33s ease;
 }
 nav .container .toggle.active span:nth-child(1) {
   width: 2em;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg) scaleX(1);
 }
 nav .container .toggle.active span:nth-child(2) {
-  transform: translate(-50%, -50%) scaleX(0);
+  transform: translate(-50%, -50%) rotate(0) scaleX(0);
 }
 nav .container .toggle.active span:nth-child(3) {
   left: 50%;
   top: 50%;
   width: 2em;
-  transform: translate(-50%, -50%) rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg) scaleX(1);
 }

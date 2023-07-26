@@ -160,7 +160,7 @@ nav {
         }
 
         .toggle {
-            display: inline-block;
+            display: block;
             position: relative;
             font: inherit;
             border: 0;
@@ -182,24 +182,26 @@ nav {
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%) rotate(0) scaleX(1);
                 background-color: #212121;
-                transition: transform .33s ease, width .33s ease, left .33s ease, top .33s ease;
 
                 &:nth-child(1) {
                     top: 38%;
                     left: 43%;
                     width: 1.5em;
+                    transition: transform .33s ease, left .33s ease, top .33s ease;
                 }
 
                 &:nth-child(2) {
                     transform-origin: left;
+                    transition: width .33s ease, transform .33s ease;
                 }
 
                 &:nth-child(3) {
                     top: 62%;
                     left: 43%;
                     width: 1.5em;
+                    transition: transform .33s ease, left .33s ease, top .33s ease;
                 }
             }
 
@@ -210,18 +212,18 @@ nav {
                         width: 2em;
                         left: 50%;
                         top: 50%;
-                        transform: translate(-50%, -50%) rotate(45deg);
+                        transform: translate(-50%, -50%) rotate(45deg) scaleX(1);
                     }
 
                     &:nth-child(2) {
-                        transform: translate(-50%, -50%) scaleX(0);
+                        transform: translate(-50%, -50%) rotate(0) scaleX(0);
                     }
 
                     &:nth-child(3) {
                         left: 50%;
                         top: 50%;
                         width: 2em;
-                        transform: translate(-50%, -50%) rotate(-45deg);
+                        transform: translate(-50%, -50%) rotate(-45deg) scaleX(1);
                     }
                 }
             }
