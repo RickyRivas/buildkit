@@ -40,17 +40,17 @@ export const pages = [
 // 3 main services 
 export const services = [
     {
-        name: 'Screen Printing',
+        name: 'Service Item',
         description: `Talk about the service with keywords people will be searching for it by. Keep it 1-2
 						sentences.`
     },
     {
-        name: 'Embroidery',
+        name: 'Service Item',
         description: `Talk about the service with keywords people will be searching for it by. Keep it 1-2
 						sentences.`
     },
     {
-        name: 'Direct to Film',
+        name: 'Service Item',
         description: `Talk about the service with keywords people will be searching for it by. Keep it 1-2
 						sentences.`
     }

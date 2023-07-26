@@ -41,7 +41,7 @@
     .container {
       text-align: center;
       width: 96%;
-      max-width: (1280/20em);
+      max-width: (1200/20em);
       margin: 0 auto;
       @media only screen and(min-width: 768px) {
         text-align: left;
