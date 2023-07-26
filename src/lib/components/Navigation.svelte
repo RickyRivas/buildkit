@@ -12,16 +12,16 @@
       path: "/about",
     },
     {
-      name: "Docs",
-      path: "/docs",
+      name: "services",
+      path: "/services",
     },
     {
       name: "Faq",
       path: "/faq",
     },
     {
-      name: "Tutorial",
-      path: "/tut",
+      name: "Contact",
+      path: "/contact",
     },
   ]
 
