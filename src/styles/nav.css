@@ -1,0 +1,160 @@
+nav {
+  background-color: #fff;
+  border-bottom: 1px solid #bebebe;
+}
+nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 0.5em 1em;
+  max-width: 60em;
+  margin: 0 auto;
+}
+nav .container .logo {
+  width: 2.5em;
+  display: block;
+}
+nav .container .logo svg {
+  width: 100%;
+  height: auto;
+}
+nav .container .nav-links {
+  background-color: white;
+  position: absolute;
+  top: 0em;
+  right: 0;
+  width: 80%;
+  height: 100vh;
+  padding: 10em 0 0 2em;
+  transform: translateX(100%);
+  transition: transform 0.33s ease;
+  list-style: none;
+  text-align: left;
+  z-index: 1;
+}
+nav .container .nav-links .nav-link {
+  display: block;
+  margin: 0 0 1em 0;
+}
+nav .container .nav-links .nav-link a {
+  text-decoration: none;
+  color: #000;
+  transition: color 0.33s ease;
+  display: inline-block;
+  font-size: 1.2em;
+  position: relative;
+  text-transform: uppercase;
+}
+nav .container .nav-links .nav-link a::after {
+  content: '';
+  width: 0%;
+  background-color: currentColor;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  display: block;
+  transition: width 0.33s ease;
+}
+nav .container .nav-links .nav-link a.active,
+nav .container .nav-links .nav-link a:hover {
+  color: var(--primary-color);
+}
+nav .container .nav-links .nav-link a.active::after,
+nav .container .nav-links .nav-link a:hover::after {
+  width: 100%;
+}
+nav .container .nav-links .btn {
+  font-size: 1.2em;
+  display: inline-block;
+  width: auto;
+  color: white;
+  padding: 0.75em 2em;
+  background-color: #ff541a;
+  text-decoration: none;
+  border-radius: 0.5em;
+  transition: background-color 0.33s ease;
+}
+nav .container .nav-links .btn:hover {
+  background-color: #212121;
+}
+@media (min-width: 1024px) {
+  nav .container .nav-links {
+    position: relative;
+    height: auto;
+    transform: none;
+    padding: 0;
+    width: auto;
+    background-color: transparent;
+  }
+  nav .container .nav-links .nav-link,
+  nav .container .nav-links li {
+    display: inline-block;
+    margin: 0 0 0 1em;
+  }
+  nav .container .nav-links .nav-link a,
+  nav .container .nav-links li a {
+    font-size: inherit;
+  }
+  nav .container .nav-links .btn {
+    font-size: inherit;
+  }
+}
+nav .container .nav-links.active {
+  transform: translateX(0%);
+}
+nav .container .toggle {
+  display: block;
+  font: inherit;
+  border: 0;
+  color: white;
+  width: 2.5em;
+  height: 2.5em;
+  position: relative;
+  background-color: transparent;
+  transition: background-color 0.33s ease;
+  z-index: 2;
+}
+@media (min-width: 1024px) {
+  nav .container .toggle {
+    display: none;
+  }
+}
+nav .container .toggle span {
+  width: 100%;
+  height: 2px;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+nav .container .toggle span::before,
+nav .container .toggle span::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: #212121;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.33s ease;
+  transform-origin: center;
+}
+nav .container .toggle span::before {
+  transform: rotate(0) translateY(-4px);
+}
+nav .container .toggle span::after {
+  transform: rotate(0) translateY(4px);
+}
+nav .container .toggle.active {
+  background-color: #f4f4f4;
+}
+nav .container .toggle.active span::before {
+  transform: rotate(45deg);
+}
+nav .container .toggle.active span::after {
+  transform: rotate(-45deg);
+}
