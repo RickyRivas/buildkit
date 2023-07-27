@@ -1,0 +1,247 @@
+// Contact Us Page
+#contact-landing {
+    display: block;
+    text-align: center;
+    padding: 3em 0;
+    width: 100vw;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 1.5vw;
+        padding: 5em 0;
+    }
+
+    @media only screen and (min-width: 1024px) {
+        font-size: inherit;
+    }
+
+    .form-container {
+        display: inline-block;
+        vertical-align: top;
+        width: 96%;
+        max-width: (600/20em);
+        text-align: left;
+
+        @media only screen and(min-width: 768px) {
+            margin-right: 3em;
+        }
+
+        .contact-items {
+            width: 96%;
+            margin: 0 auto 2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .item {
+                display: inline-block;
+                text-align: left;
+
+                a {
+                    display: block;
+                    text-decoration: none;
+                    color: var(--secondary-color);
+                    transition: color .33s ease;
+
+                    &.icon {
+                        display: inline-block;
+                        margin-right: .2em;
+
+                        svg {
+                            width: (20/20em);
+                            height: auto;
+                        }
+                    }
+
+                    &:hover {
+                        color: var(--primary-color);
+                    }
+                }
+            }
+        }
+
+        h2,
+        p {
+            text-align: left;
+        }
+
+        p {
+            margin: 0 0 2em 0;
+        }
+
+        form {
+            display: block;
+
+            @media only screen and (min-width: 768px) {
+                background-color: #fff;
+                border-radius: .5em;
+                box-shadow: var(--box-shadow);
+                padding: 2em;
+            }
+
+            .form-control {
+                display: block;
+                position: relative;
+                margin-bottom: 1em;
+
+                label {
+                    color: #202020;
+                    margin-bottom: .2em;
+                    display: block;
+
+                    @media only screen and (max-width: 768px) {
+                        font-size: 17px;
+                    }
+                }
+
+                input[type='text'],
+                input[type='number'],
+                input[type='email'],
+                select {
+                    border: 0;
+                    padding: .5em;
+                    color: #202020;
+                    outline: none;
+                    position: relative;
+                    display: block;
+                    font: inherit;
+                    caret-color: black;
+                    border: 1px solid rgba(0, 0, 0, .2);
+                    border-radius: .2em;
+                    transition: border .33s ease;
+                    display: block;
+                    width: 100%;
+
+                    @media only screen and (max-width: 767px) {
+                        font-size: 16px;
+                    }
+
+                    &::placeholder {
+                        color: rgba(0, 0, 0, .4);
+                    }
+
+                    &:focus,
+                    &:active {
+                        border: 1px solid var(--primary-color);
+                    }
+                }
+
+                textarea {
+                    resize: none;
+                    padding: .5em;
+                    outline: none;
+                    font: inherit;
+                    color: #202020;
+                    border: 1px solid rgba(0, 0, 0, .2);
+                    border-radius: .2em;
+                    font-family: inherit;
+                    display: block;
+                    width: 100%;
+
+                    @media only screen and (max-width: 767px) {
+                        font-size: 16px;
+                    }
+
+                    &::placeholder {
+                        color: rgba(0, 0, 0, .4);
+                    }
+
+                    &:focus,
+                    &:active {
+                        border: 1px solid var(--primary-color);
+                    }
+                }
+
+                select {
+                    width: 100%;
+                    padding: 1em;
+                    -webkit-appearance: none;
+                    background-image: url(/down-chevron.svg);
+                    background-position: right 0.75em center;
+                    background-repeat: no-repeat;
+                    background-size: (14/20em);
+                    background-color: white;
+                    border-radius: 0;
+
+                    &:active,
+                    &:hover {
+                        border-bottom: 1px solid --main-primary-color;
+                    }
+                }
+
+                &.active {
+                    &::before {
+                        width: 100%;
+                    }
+                }
+            }
+
+            #submit {
+                padding: 1em;
+                border: 0;
+                color: #fff;
+                text-transform: uppercase;
+                letter-spacing: .025em;
+                width: 100%;
+                transition: background-color .33s ease;
+                position: relative;
+                background-color: var(--primary-color);
+                overflow: hidden;
+                border-radius: .2em;
+
+                span {
+                    color: white;
+                    position: relative;
+                    z-index: 2;
+                }
+
+                &::before {
+                    content: '';
+                    width: 100%;
+                    height: 100%;
+                    transition: all .33s ease;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    z-index: 1;
+                    display: block;
+                    background: #202020;
+                    transform: translateY(-100%);
+                    border-radius: .2em;
+                }
+
+                &:hover {
+                    &::before {
+                        transform: translateY(0);
+                    }
+                }
+
+                &:disabled {
+                    background-color: grey;
+                    cursor: not-allowed;
+
+                    &:hover {
+                        &::before {
+                            transform: translateY(-100%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .side-stock {
+        width: 90%;
+        max-width: (500/20em);
+        height: auto;
+        display: inline-block;
+        vertical-align: top;
+        box-shadow: var(--box-shadow);
+        border-radius: (4/20em);
+        display: none;
+
+        @media only screen and(min-width: 768px) {
+            margin-left: 3em;
+            display: inline-block;
+        }
+    }
+}
