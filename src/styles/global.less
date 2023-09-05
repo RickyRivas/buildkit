@@ -5,11 +5,20 @@
     margin: 0;
 }
 
+// Light mode styles
 :root {
     --primary-color: #ff541a;
     --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    --toggleBg: #ffffff;
+    --toggleText: #000000;
 }
 
+// dark mode styles by updating css vars
+&[data-theme='dark'] {
+    --primary-color: red;
+    --toggleBg: #2e2e2e;
+    --toggleText: #ffffff;
+}
 
 html {
     overflow-y: scroll;

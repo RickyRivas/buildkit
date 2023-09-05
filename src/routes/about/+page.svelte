@@ -9,7 +9,6 @@
 
   // logic
   const thisPage = pages.find((p) => p.path === $page.route.id)
-  console.log(thisPage)
   const pageTitle = $page.route.id?.slice(1)
 </script>
 
