@@ -104,7 +104,7 @@ const options = {
   root: Root,
   service_worker: false,
   templates: {
-    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en" data-theme="">\n\n<head>\n	<meta charset="utf-8" />\n	<link rel="icon" href="' + assets2 + '/favicon.png" />\n	<meta name="viewport" content="width=device-width" />\n\n	<!-- Business -->\n	<!-- <meta name="keywords" content=""> -->\n\n	<!--Social Media Display-->\n	<meta property="og:type" content="website">\n	<meta property="og:image" content="/og.jpg">\n	<meta property="og:image:secure_url" content="/">\n\n	<!-- Favicons generate from https://realfavicongenerator.net/ -->\n\n	<!-- fonts -->\n	<link rel="preconnect" href="https://fonts.googleapis.com">\n	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n	<link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500&display=swap" rel="stylesheet">\n\n	' + head + '\n</head>\n\n<body data-sveltekit-preload-data="hover">\n	<div style="display: contents">' + body + "</div>\n</body>\n\n</html>",
+    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en" data-theme="">\n\n<head>\n	<meta charset="utf-8" />\n	<meta name="viewport" content="width=device-width" />\n\n	<!-- Business -->\n	<!-- <meta name="keywords" content=""> -->\n\n	<!--Social Media Display-->\n	<meta property="og:type" content="website">\n	<meta property="og:image" content="/og.jpg">\n	<meta property="og:image:secure_url" content="/">\n\n	<!-- Favicons generate from https://realfavicongenerator.net/ -->\n\n	<!-- fonts -->\n	<link rel="preconnect" href="https://fonts.googleapis.com">\n	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n	<link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500&display=swap" rel="stylesheet">\n\n	' + head + '\n</head>\n\n<body data-sveltekit-preload-data="hover">\n	<div style="display: contents">' + body + "</div>\n</body>\n\n</html>",
     error: ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -166,10 +166,10 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "ulpt5f"
+  version_hash: "lgseqh"
 };
 function get_hooks() {
-  return import("./hooks.server.js");
+  return {};
 }
 export {
   assets as a,
