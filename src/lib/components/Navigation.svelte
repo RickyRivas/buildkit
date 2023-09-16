@@ -5,7 +5,6 @@
   import { enhance } from "$app/forms"
   import type { SubmitFunction } from "@sveltejs/kit"
   import { onMount } from "svelte"
-  /** @type {import('./$types).ActionData} */
 
   let isActive = false
 
