@@ -22,6 +22,9 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
+function null_to_empty(value) {
+  return value == null ? "" : value;
+}
 let current_component;
 function set_current_component(component) {
   current_component = component;
@@ -125,16 +128,17 @@ function add_classes(classes) {
   return classes ? ` class="${classes}"` : "";
 }
 export {
-  setContext as a,
-  subscribe as b,
+  add_attribute as a,
+  setContext as b,
   create_ssr_component as c,
-  add_classes as d,
-  each as e,
-  add_attribute as f,
-  escape as g,
-  getContext as h,
+  each as d,
+  escape as e,
+  add_classes as f,
+  getContext as g,
+  noop as h,
+  safe_not_equal as i,
   missing_component as m,
-  noop as n,
-  safe_not_equal as s,
+  null_to_empty as n,
+  subscribe as s,
   validate_component as v
 };

@@ -29,11 +29,11 @@
   }
 
   onMount(() => {
-    currentTheme = document.documentElement.getAttribute("data-theme")
-
-    if (!currentTheme) {
-      currentTheme = "light"
-    }
+    // DARK MODE FUNC POSTPONED
+    // currentTheme = document.documentElement.getAttribute("data-theme")
+    // if (!currentTheme) {
+    //   currentTheme = "light"
+    // }
   })
 
   // add class to header when user scrolls 100px
@@ -80,7 +80,7 @@
       <span />
       <span />
     </button>
-    <form id="theme" method="POST" use:enhance={updateTheme}>
+    <!-- <form id="theme" method="POST" use:enhance={updateTheme}>
       <button
         id="themeToggle"
         class={currentTheme}
@@ -110,6 +110,6 @@
           </svg>
         </span>
       </button>
-    </form>
+    </form> -->
   </div>
 </nav>

@@ -1,6 +1,7 @@
 import { b as base, a as assets, r as reset, p as public_env, o as options, s as set_private_env, c as set_public_env, g as get_hooks } from "./chunks/internal.js";
+import { t as text, H as HttpError, j as json, R as Redirect, e as error, A as ActionFailure } from "./chunks/index.js";
 import * as devalue from "devalue";
-import { n as noop, s as safe_not_equal } from "./chunks/ssr.js";
+import { h as noop, i as safe_not_equal } from "./chunks/ssr.js";
 import { parse, serialize } from "cookie";
 import * as set_cookie_parser from "set-cookie-parser";
 const DEV = false;
@@ -62,45 +63,6 @@ function is_form_content_type(request) {
     "text/plain"
   );
 }
-class HttpError {
-  /**
-   * @param {number} status
-   * @param {{message: string} extends App.Error ? (App.Error | string | undefined) : App.Error} body
-   */
-  constructor(status, body) {
-    this.status = status;
-    if (typeof body === "string") {
-      this.body = { message: body };
-    } else if (body) {
-      this.body = body;
-    } else {
-      this.body = { message: `Error: ${status}` };
-    }
-  }
-  toString() {
-    return JSON.stringify(this.body);
-  }
-}
-class Redirect {
-  /**
-   * @param {300 | 301 | 302 | 303 | 304 | 305 | 306 | 307 | 308} status
-   * @param {string} location
-   */
-  constructor(status, location) {
-    this.status = status;
-    this.location = location;
-  }
-}
-class ActionFailure {
-  /**
-   * @param {number} status
-   * @param {T} [data]
-   */
-  constructor(status, data) {
-    this.status = status;
-    this.data = data;
-  }
-}
 function exec(match, params, matchers) {
   const result = {};
   const values = match.slice(1);
@@ -135,42 +97,6 @@ function exec(match, params, matchers) {
   if (buffered)
     return;
   return result;
-}
-function error(status, body) {
-  if (isNaN(status) || status < 400 || status > 599) {
-    throw new Error(`HTTP error status codes must be between 400 and 599 — ${status} is invalid`);
-  }
-  return new HttpError(status, body);
-}
-function json(data, init2) {
-  const body = JSON.stringify(data);
-  const headers = new Headers(init2?.headers);
-  if (!headers.has("content-length")) {
-    headers.set("content-length", encoder$3.encode(body).byteLength.toString());
-  }
-  if (!headers.has("content-type")) {
-    headers.set("content-type", "application/json");
-  }
-  return new Response(body, {
-    ...init2,
-    headers
-  });
-}
-const encoder$3 = new TextEncoder();
-function text(body, init2) {
-  const headers = new Headers(init2?.headers);
-  if (!headers.has("content-length")) {
-    const encoded = encoder$3.encode(body);
-    headers.set("content-length", encoded.byteLength.toString());
-    return new Response(encoded, {
-      ...init2,
-      headers
-    });
-  }
-  return new Response(body, {
-    ...init2,
-    headers
-  });
 }
 function coalesce_to_error(err) {
   return err instanceof Error || err && /** @type {any} */
@@ -270,8 +196,8 @@ async function render_endpoint(event, mod, state) {
     /** @type {import('types').HttpMethod} */
     event.request.method
   );
-  let handler = mod[method];
-  if (!handler && method === "HEAD") {
+  let handler = mod[method] || mod.fallback;
+  if (method === "HEAD" && mod.GET && !mod.HEAD) {
     handler = mod.GET;
   }
   if (!handler) {
@@ -384,6 +310,7 @@ function make_trackable(url, callback) {
   return tracked;
 }
 function disable_hash(url) {
+  allow_nodejs_console_log(url);
   Object.defineProperty(url, "hash", {
     get() {
       throw new Error(
@@ -393,12 +320,20 @@ function disable_hash(url) {
   });
 }
 function disable_search(url) {
+  allow_nodejs_console_log(url);
   for (const property of ["search", "searchParams"]) {
     Object.defineProperty(url, property, {
       get() {
         throw new Error(`Cannot access url.${property} on a page with prerendering enabled`);
       }
     });
+  }
+}
+function allow_nodejs_console_log(url) {
+  {
+    url[Symbol.for("nodejs.util.inspect.custom")] = (depth, opts, inspect) => {
+      return inspect(new URL(url), opts);
+    };
   }
 }
 const DATA_SUFFIX = "/__data.json";
@@ -620,6 +555,7 @@ async function unwrap_promises(object) {
   return object;
 }
 const INVALIDATED_PARAM = "x-sveltekit-invalidated";
+const TRAILING_SLASH_PARAM = "x-sveltekit-trailing-slash";
 async function load_server_data({
   event,
   state,
@@ -2488,6 +2424,7 @@ const valid_server_exports = /* @__PURE__ */ new Set([
   "DELETE",
   "OPTIONS",
   "HEAD",
+  "fallback",
   "prerender",
   "trailingSlash",
   "config",
@@ -2533,7 +2470,8 @@ async function respond(request, options2, manifest, state) {
   let invalidated_data_nodes;
   if (is_data_request) {
     decoded = strip_data_suffix(decoded) || "/";
-    url.pathname = strip_data_suffix(url.pathname) || "/";
+    url.pathname = strip_data_suffix(url.pathname) + (url.searchParams.get(TRAILING_SLASH_PARAM) === "1" ? "/" : "") || "/";
+    url.searchParams.delete(TRAILING_SLASH_PARAM);
     invalidated_data_nodes = url.searchParams.get(INVALIDATED_PARAM)?.split("").map((node) => node === "1");
     url.searchParams.delete(INVALIDATED_PARAM);
   }

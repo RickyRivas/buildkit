@@ -7,10 +7,10 @@ function __memo(fn) {
 return {
 	appDir: "_app",
 	appPath: "_app",
-	assets: new Set([".DS_Store","favicon.png","img01.jpg"]),
-	mimeTypes: {".png":"image/png",".jpg":"image/jpeg"},
+	assets: new Set(["contactside.jpg","favicon.png","img01.jpg","og.jpg"]),
+	mimeTypes: {".jpg":"image/jpeg",".png":"image/png"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.b03a992a.js","app":"_app/immutable/entry/app.d15f64ab.js","imports":["_app/immutable/entry/start.b03a992a.js","_app/immutable/chunks/scheduler.b0c1c2c3.js","_app/immutable/chunks/singletons.f5edb080.js","_app/immutable/entry/app.d15f64ab.js","_app/immutable/chunks/scheduler.b0c1c2c3.js","_app/immutable/chunks/index.6b3f7f9e.js"],"stylesheets":[],"fonts":[]},
+		client: {"start":"_app/immutable/entry/start.d6e3bb91.js","app":"_app/immutable/entry/app.93fa1d5f.js","imports":["_app/immutable/entry/start.d6e3bb91.js","_app/immutable/chunks/scheduler.e3a1d36e.js","_app/immutable/chunks/singletons.d7ef65df.js","_app/immutable/entry/app.93fa1d5f.js","_app/immutable/chunks/scheduler.e3a1d36e.js","_app/immutable/chunks/index.adfe35ae.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
@@ -55,6 +55,13 @@ return {
 				params: [],
 				page: { layouts: [0,], errors: [1,], leaf: 6 },
 				endpoint: null
+			},
+			{
+				id: "/sitemap.xml",
+				pattern: /^\/sitemap\.xml\/?$/,
+				params: [],
+				page: null,
+				endpoint: __memo(() => import('./entries/endpoints/sitemap.xml/_server.js'))
 			}
 		],
 		matchers: async () => {
