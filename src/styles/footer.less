@@ -104,21 +104,26 @@ footer {
                     margin-bottom: 0;
                 }
 
-                .socials {
-                    a.icon {
-                        text-decoration: none;
-                        color: #fff;
-                        transition: color .33s ease;
-                        display: inline-block;
-                        margin-right: 1em;
+                .socialmedia {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: .5em;
+
+                    a {
+                        display: block;
+                        width: 20px;
+                        height: 20px;
+                        transition: transform .33s ease;
 
                         svg {
-                            width: (20/20em);
-                            height: auto;
+                            display: inline-block;
+                            width: 100%;
+                            height: 100%;
                         }
 
                         &:hover {
-                            color: var(--primary-color);
+                            transform: scale(1.2);
                         }
                     }
                 }

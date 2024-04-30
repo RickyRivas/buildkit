@@ -49,30 +49,11 @@ export const business = {
         saturday: '',
         sunday: '',
     },
-    socials: [
-        {
-            platform: 'facebook',
-            url: '/'
-        },
-        {
-            platform: 'google',
-            url: '/'
-        },
-        {
-            platform: 'tiktok',
-            url: '/'
-        },
-        {
-            platform: 'instagram',
-            url: '/'
-        },
-        {
-            platform: 'twitter',
-            url: ''
-        },
-        {
-            platform: 'youtube',
-            url: ''
-        }
-    ]
+    socials: {
+        facebook: '/',
+        instagram: '/',
+        xTwitter: '/',
+        youtube: '/',
+        google: '/'
+    }
 }
