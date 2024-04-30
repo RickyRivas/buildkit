@@ -4,6 +4,7 @@
   import { page } from "$app/stores"
   import Logo from "$lib/Logo.svelte"
   import SocialMedia from "./SocialMedia.svelte"
+  import Copyright from "$lib/Copyright.svelte"
 </script>
 
 <footer>
@@ -76,8 +77,8 @@
   </div>
 
   <p class="credit">
-    Custom Coded & Designed by <a href="https://www.rivaswebdesigns.com/" target="_blank"
-      >Rivas Web Designs</a>
-    | {business.name} ©2023
+    <Copyright>
+      {business.name}
+    </Copyright>
   </p>
 </footer>
