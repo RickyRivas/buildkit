@@ -1,23 +1,7 @@
 <script>
-  // components
-
   // stores
-  import {
-    phone,
-    email,
-    socials,
-    fullAddress,
-    googleLink,
-    companyName,
-    pages,
-    services,
-  } from "$lib/config"
+  import { business } from "$lib/config"
   import { page } from "$app/stores"
-
-  // styles
-  import "$styles/footer.less"
-
-  // logic
 </script>
 
 <footer>
@@ -50,7 +34,7 @@
         <h2>Sitemap</h2>
         <ul>
           <!-- pages controled by site config-->
-          {#each pages as { name, path }}
+          {#each business.interiorPages as { name, path }}
             <li class="link">
               <a href={path} class:active={$page.url.pathname === path}>{name}</a>
             </li>
@@ -61,11 +45,21 @@
       <div class="item">
         <h2>Services</h2>
         <ul>
-          {#each services as service}
-            <li>
-              <a href="/services">{service.name}</a>
-            </li>
-          {/each}
+          <li>
+            <a href="/services">Service Item</a>
+          </li>
+          <li>
+            <a href="/services">Service Item</a>
+          </li>
+          <li>
+            <a href="/services">Service Item</a>
+          </li>
+          <li>
+            <a href="/services">Service Item</a>
+          </li>
+          <li>
+            <a href="/services">Service Item</a>
+          </li>
         </ul>
       </div>
       <!-- Divider -->
@@ -73,16 +67,16 @@
         <h2>Contact</h2>
         <ul>
           <li>
-            <a class="mail" href="mailto:{email}">Email: {email}</a>
+            <a class="mail" href="mailto:{business.email}">Email: {business.email}</a>
           </li>
           <li>
             <a
-              href="tel:{phone
+              href="tel:{business.phone
                 .replace('(', '')
                 .replace(')', '')
                 .replace('-', '')
                 .replace(' ', '')}">
-              <span>Phone: </span>{phone}</a>
+              <span>Phone: </span>{business.phone}</a>
           </li>
           <li>
             <div class="socials">
@@ -129,6 +123,6 @@
   <p class="credit">
     Custom Coded & Designed by <a href="https://www.rivaswebdesigns.com/" target="_blank"
       >Rivas Web Designs</a>
-    | {companyName} ©2023
+    | {business.name} ©2023
   </p>
 </footer>
