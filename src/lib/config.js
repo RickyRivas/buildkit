@@ -7,6 +7,8 @@ export const business = {
     phone: '(918) 123-4567',
     address: '1234 East Tulsa, Ok 12345',
     email: 'biz@email.com',
+    // Set to true if client opts for blog
+    includeBlog: true,
     homepage: {
         metaDescription: "This is the homepage description",
     },
@@ -41,13 +43,13 @@ export const business = {
         },
     ],
     businessHours: {
-        monday: '',
-        tuesday: '',
-        wednesday: '',
-        thursday: '',
-        friday: '',
-        saturday: '',
-        sunday: '',
+        monday: '8:00am to 5:00pm',
+        tuesday: '8:00am to 5:00pm',
+        wednesday: '8:00am to 5:00pm',
+        thursday: '8:00am to 5:00pm',
+        friday: '8:00am to 5:00pm',
+        saturday: 'Closed',
+        sunday: 'Closed',
     },
     socials: {
         facebook: '/',

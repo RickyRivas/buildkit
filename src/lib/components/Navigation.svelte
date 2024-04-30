@@ -32,6 +32,11 @@
           <a href={path} on:click={toggleNav}>{name}</a>
         </li>
       {/each}
+      {#if business.includeBlog}
+        <li class="nav-link" class:active={$page.url.pathname === "/blog"}>
+          <a href="/blog" on:click={toggleNav}>Blog</a>
+        </li>
+      {/if}
       <li class="">
         <a href="/contact" class="btn" on:click={toggleNav}>Learn More</a>
       </li>

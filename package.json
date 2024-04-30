@@ -22,5 +22,8 @@
 		"typescript": "^5.0.0",
 		"vite": "^5.0.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"mdsvex": "^0.11.0"
+	}
 }
