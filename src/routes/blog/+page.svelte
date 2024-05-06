@@ -9,6 +9,7 @@
   import { business } from "$lib/config"
   export let data
   const { posts } = data
+  // console.log(posts)
 </script>
 
 <SEO
