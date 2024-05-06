@@ -1,38 +1,11 @@
-# create-svelte
+# Freelance Website kit
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This website template is a starting point for all future builds.
 
-## Creating a project
+## Key Features
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- **Built with SvelteKit**: Enjoy the benefits of fast rendering, component-based architecture, and a modern development experience.
+- **Pre coded sections ** This template has pre coded layouts.
+- **CSS/LESS Styling**: Easily customize the look and feel with modular CSS and LESS. Change colors, fonts, and layout to match the client's branding.
+- **Integrated Blog**: blog, this template provides a fully functional DECAP CMS blog setup with basic CRUD operations for posts.
+- **Shopify E-commerce Functionality**: This template will include a Shopify integration.
