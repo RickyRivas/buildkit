@@ -16,6 +16,8 @@
 
     .posts {
         display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
 
         .post {
             display: block;
@@ -42,8 +44,33 @@
                 }
             }
 
+            a {
+                color: @linkcolor;
+                transition: color .33s ease;
+
+                &:hover {
+                    color: @headingcolor;
+                }
+            }
+
+            .tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0 .25em;
+
+                span {
+                    font-size: (15/20em);
+                    text-transform: capitalize;
+                }
+            }
+
             .description {
                 font-size: (15/20em);
+                margin-bottom: 1em;
+            }
+
+            p {
+                margin: 0;
             }
         }
     }

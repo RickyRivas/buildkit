@@ -33,12 +33,14 @@
         </li>
       {/each}
       {#if business.includeBlog}
-        <li class="nav-link" class:active={$page.url.pathname === "/blog"}>
+        <li
+          class="nav-link"
+          class:active={$page.url.pathname === "/blog" || $page.url.pathname.startsWith("/blog")}>
           <a href="/blog" on:click={toggleNav}>Blog</a>
         </li>
       {/if}
       <li class="">
-        <a href="/contact" class="btn" on:click={toggleNav}>Learn More</a>
+        <a href="/contact" class="btn" on:click={toggleNav}>Contact Us</a>
       </li>
     </ul>
 

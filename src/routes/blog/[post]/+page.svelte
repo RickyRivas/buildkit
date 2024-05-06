@@ -26,7 +26,9 @@
 <main>
   <section id="blog-post">
     <div class="container">
-      <Content />
+      <div id="content">
+        <Content />
+      </div>
     </div>
   </section>
 </main>

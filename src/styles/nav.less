@@ -71,6 +71,7 @@ nav {
             text-align: left;
             z-index: 1;
             overflow: auto;
+            margin: 0;
 
             @media only screen and (min-width: 768px) {
                 width: 50%;
@@ -113,22 +114,7 @@ nav {
                 }
             }
 
-            // CTA
-            .btn {
-                font-size: 1.2em;
-                display: inline-block;
-                width: auto;
-                color: white;
-                padding: .75em 2em;
-                background-color: fade(#ff541a, 100%);
-                text-decoration: none;
-                border-radius: .5em;
-                transition: background-color .33s ease;
-
-                &:hover {
-                    background-color: #212121;
-                }
-            }
+            // // CTA
 
             @media (min-width: 1024px) {
                 position: relative;
@@ -143,17 +129,11 @@ nav {
                     display: inline-block;
                     margin: 0 0 0 1em;
 
-                    a {
+                    a:not(.btn) {
                         font-size: inherit;
                     }
                 }
-
-                .btn {
-                    font-size: inherit;
-                }
             }
-
-
 
             &.active {
                 transform: translateX(0%);

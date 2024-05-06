@@ -24,11 +24,22 @@
         <h2>Sitemap</h2>
         <ul>
           <!-- pages controled by site config-->
+          <li class="link">
+            <a href="/" class:active={$page.url.pathname === "/"}>Home</a>
+          </li>
           {#each business.interiorPages as { name, path }}
             <li class="link">
               <a href={path} class:active={$page.url.pathname === path}>{name}</a>
             </li>
           {/each}
+          {#if business.includeBlog}
+            <li class="link">
+              <a
+                href="/blog"
+                class:active={$page.url.pathname === "/blog" ||
+                  $page.url.pathname.startsWith("/blog")}>Blog</a>
+            </li>
+          {/if}
         </ul>
       </div>
       <!-- Divider -->

@@ -11,14 +11,11 @@
     --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     --toggleBg: #ffffff;
     --toggleText: #000000;
+    --link-color: #ff541a;
 }
 
-// dark mode styles by updating css vars
-&[data-theme='dark'] {
-    --primary-color: red;
-    --toggleBg: #2e2e2e;
-    --toggleText: #ffffff;
-}
+@linkcolor: #ff541a;
+@headingcolor: #212121;
 
 html {
     overflow-y: scroll;
@@ -48,6 +45,35 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+p {
+    margin: 0 0 1.58em;
+    padding: 0
+}
+
+ol,
+ul {
+    padding: 0;
+    margin: 0 0 1.58em 1.6em
+}
+
+/* ===============================================
+	links 
+=============================================== */
+
+a {
+    text-decoration: none;
+}
+
+#content a {
+    color: @linkcolor;
+    transition: color 0.33s ease-in-out;
+    text-decoration: underline;
+
+    &:hover {
+        color: @headingcolor;
+    }
+}
+
 /* ===============================================
 	.screenreader 
 	a11y support for descriptive text on vaguely worded buttons
@@ -65,9 +91,101 @@ input[type=number] {
     clip: rect(0 0 0 0);
 }
 
+/* ===============================================
+	containers
+=============================================== */
+
 .container {
     display: block;
     width: 96%;
     max-width: (1200/20em);
     margin: 0 auto;
+}
+
+/* ===============================================
+	h family || hfam 
+=============================================== */
+@h2fs: 25;
+@h3fs: 23;
+@h4fs: 21;
+@h5fs: 20;
+@h6fs: 19;
+
+h1,
+h2:not(.title),
+h3:not(.title),
+h4,
+h5,
+h6 {
+    line-height: 1;
+    text-align: left;
+    color: @headingcolor;
+    margin: 0 0 (15/@h2fs)*1em;
+    text-rendering: auto;
+    text-transform: capitalize
+}
+
+h2:not(.topic) {
+    font-size: (@h2fs/20)*1em;
+}
+
+h3:not(.topic) {
+    font-size: (@h3fs/20)*1em;
+}
+
+h4 {
+    font-size: (@h4fs/20)*1em;
+}
+
+h5 {
+    font-size: (@h5fs/20)*1em;
+}
+
+h6 {
+    font-size: (@h6fs/20)*1em;
+}
+
+// base button
+
+.btn {
+    @parentfs: 20;
+    @fs: 15;
+    @lh: 50;
+    @ls: 0;
+    @height: 0;
+    @width: 150;
+    @br: 0;
+    @bc: @linkcolor;
+    @hoverbc: @headingcolor;
+    @borderstyle: false;
+
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    color: #fff;
+    font-size: (@fs/@parentfs*1em);
+    line-height: (@lh/@fs);
+    background-color: (@bc);
+    width: (@width/@fs*1em);
+    transition: background-color .33s ease, color .33s ease;
+
+    & when (@ls > 0) {
+        letter-spacing: (@ls/1000*1em);
+    }
+
+    & when (@br > 0) {
+        border-radius: (@br/@fs*1em);
+    }
+
+    & when (@height > 0) {
+        height: @height/@fs*1em;
+    }
+
+    & when (@borderstyle) {
+        border: 1px solid @color1;
+    }
+
+    &:hover {
+        background-color: (@hoverbc);
+    }
 }

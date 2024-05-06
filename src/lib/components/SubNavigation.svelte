@@ -52,8 +52,7 @@
       color: white;
       font-weight: bold;
       font-size: (49/20em);
-      line-height: 1.2;
-      text-transform: uppercase;
+      margin-bottom: 0;
     }
   }
 </style>

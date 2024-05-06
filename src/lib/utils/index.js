@@ -23,5 +23,6 @@ export const fetchMarkdownPosts = async () => {
             };
         })
     );
-    return posts;
+    // most recent to least recent
+    return posts.sort((a, b) => Date.parse(b.postData.date) - Date.parse(a.postData.date))
 };

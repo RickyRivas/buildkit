@@ -9,11 +9,13 @@
   import { business } from "$lib/config"
   export let data
   const { posts } = data
-  // console.log(posts)
+
+  // mark most recent post
+  if (posts[0]) posts[0].postData.latest = true
 </script>
 
 <SEO
-  title="The blog of {business.name}"
+  title="Our Blog"
   description="Welcome to the blog of {business.name}"
   canonical={`${business.canonical}/blog`}
   siteName={business.name}
@@ -25,7 +27,7 @@
   logo=""
   author=""
   name="" />
-<SubNavigation pageTitle="Welcome to Our Blog" />
+<SubNavigation pageTitle="Our Blog" />
 
 <main>
   <section id="blog-posts">
@@ -36,20 +38,19 @@
         <h2>Our recent posts</h2>
         <div class="posts">
           {#each posts as { postData, path }}
-            <article class="post">
+            <article class="post {postData.latest ? 'latest' : ''}">
               <div class="thumbnail">
                 <img src={postData.thumbnail} alt={postData.imageAlt} decoding="async" />
               </div>
               <div class="tags">
                 <span>Tags:</span>
                 {#each postData.tags as tag}
-                  <span>{tag.replaceAll("-", " ")}</span>
+                  <span>{tag}</span>
                 {/each}
               </div>
               <h3>
                 <a href={"blog/" + path.replace(".md", "")}>{postData.title}</a>
               </h3>
-              <a href={"blog/" + path.replace(".md", "")} class="btn">Read Post</a>
               <p class="description">{postData.description.substring(0, 80) + "..."}</p>
               <p class="author">Written by {postData.author}</p>
               <p class="date">{formatDate(postData.date)}</p>
