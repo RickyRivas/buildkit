@@ -3,20 +3,59 @@
   // Components
   import SubNavigation from "./../../lib/components/SubNavigation.svelte"
   import SEO from "./../../lib/components/SEO.svelte"
+  import { formatDate } from "$lib/utils"
 
+  // logic
+  import { business } from "$lib/config"
   export let data
   const { posts } = data
-
-  console.log(posts)
 </script>
 
-<SEO title="Welcome to Our Blog" />
+<SEO
+  title="The blog of {business.name}"
+  description="Welcome to the blog of {business.name}"
+  canonical={`${business.canonical}/blog`}
+  siteName={business.name}
+  imageURL={business.ogImage}
+  index={true}
+  twitter={true}
+  openGraph={true}
+  schemaOrg={false}
+  logo=""
+  author=""
+  name="" />
 <SubNavigation pageTitle="Welcome to Our Blog" />
 
 <main>
-  <section>
+  <section id="blog-posts">
     <div class="container">
-      <h2>Our recent posts</h2>
+      {#if posts.length === 0}
+        <h2>No available posts.</h2>
+      {:else}
+        <h2>Our recent posts</h2>
+        <div class="posts">
+          {#each posts as { postData, path }}
+            <article class="post">
+              <div class="thumbnail">
+                <img src={postData.thumbnail} alt={postData.imageAlt} decoding="async" />
+              </div>
+              <div class="tags">
+                <span>Tags:</span>
+                {#each postData.tags as tag}
+                  <span>{tag.replaceAll("-", " ")}</span>
+                {/each}
+              </div>
+              <h3>
+                <a href={"blog/" + path.replace(".md", "")}>{postData.title}</a>
+              </h3>
+              <a href={"blog/" + path.replace(".md", "")} class="btn">Read Post</a>
+              <p class="description">{postData.description.substring(0, 80) + "..."}</p>
+              <p class="author">Written by {postData.author}</p>
+              <p class="date">{formatDate(postData.date)}</p>
+            </article>
+          {/each}
+        </div>
+      {/if}
     </div>
   </section>
 </main>

@@ -5,3 +5,5 @@
 4. close registration to invite only & invite users (myself and client)
 5. Open signup email link and click 'Accept'
 6. This will open a new link to the website with a token in the url params.  before the token in the url, enter /admin (url/admin/#invite_token=) and it should take you to complete signup.
+
+// Before any edits to site, fetch blog data

@@ -1,0 +1,65 @@
+// Display all posts
+#blog-posts {
+    padding: 3em 0;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 1.7vw;
+    }
+
+    @media only screen and (min-width: 1024px) {
+        font-size: inherit;
+    }
+
+    h2 {
+        margin-bottom: 1em;
+    }
+
+    .posts {
+        display: flex;
+
+        .post {
+            display: block;
+            width: 100%;
+            max-width: (300/20em);
+
+            .thumbnail {
+                width: (300/20em);
+                height: (300/20em);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #f4f4f4;
+                position: relative;
+
+                img {
+                    // width: auto;
+                    // height: auto;
+                    // max-width: 100%;
+                    // max-height: 100%;
+                    .overlay;
+                    object-fit: cover;
+                    object-position: center;
+                }
+            }
+
+            .description {
+                font-size: (15/20em);
+            }
+        }
+    }
+}
+
+// specific post
+#blog-post {
+    display: block;
+    padding: 3em 0;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 1.7vw;
+    }
+
+    @media only screen and (min-width: 1024px) {
+        font-size: inherit;
+        padding: 5em 0;
+    }
+}
