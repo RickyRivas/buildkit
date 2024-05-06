@@ -2,7 +2,7 @@ import { json } from "@sveltejs/kit";
 
 const fetchMarkdownPosts = async () => {
     // grabbing mds from our lib folder
-    const allPostFiles = import.meta.glob('/src/routes/blog/*.md');
+    const allPostFiles = import.meta.glob('/src/lib/blogposts/*.md');
     const iterablePostFiles = Object.entries(allPostFiles);
     const allPosts = await Promise.all(
         iterablePostFiles.map(async ([ path, resolver ]) => {
