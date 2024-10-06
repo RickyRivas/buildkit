@@ -348,3 +348,33 @@ svg {
     height: auto;
     overflow: visible;
 }
+
+#btt {
+    display: block;
+    position: fixed;
+    z-index: 7777;
+    bottom: 1em;
+    right: 1em;
+    transition: opacity .33s ease;
+    line-height: 0;
+
+    button {
+        font: inherit;
+        .buttonreset;
+        line-height: 0;
+        background-color: var(--secondary);
+        transition: background-color .33s ease;
+        color: #fff;
+        width: (50/20em);
+        height: (50/20em);
+
+        &:hover {
+            background-color: #212121;
+        }
+    }
+
+    &.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
