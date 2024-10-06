@@ -4,92 +4,79 @@
   import { page } from "$app/stores"
   import Logo from "$lib/Logo.svelte"
   import SocialMedia from "./SocialMedia.svelte"
-  import Copyright from "$lib/Copyright.svelte"
+
+  let activeTopLevelWithSubpages
+
+  $: if ($page.url.pathname) {
+    const currentPath = $page.url.pathname
+
+    // Check if current page is a top-level page
+    const isTopLevel = business.interiorPages.some((page) => page.path === currentPath)
+
+    if (isTopLevel) {
+      activeTopLevelWithSubpages = null
+    } else {
+      // Find the group containing the current subpage
+      activeTopLevelWithSubpages =
+        business.interiorPages
+          .find((group) => group.subPages?.some((subpage) => subpage.path === currentPath))
+          ?.name.toLowerCase() ?? null
+    }
+  }
 </script>
 
 <footer>
   <div class="container">
-    <div class="item">
-      <a href="/" class="logo">
-        <Logo />
-        <p class="slogan">
-          INK Bros is Tulsa's choice for custom apparel services, specializing in top-notch screen
-          printing, embroidery, and more to bring your unique designs to life.
-        </p>
-      </a>
-    </div>
-    <div class="wrap">
+    <a href="/" class="logo">
+      <Logo />
+    </a>
+
+    <div class="mod">
       <!-- Divider -->
       <div class="item">
-        <h2>Sitemap</h2>
-        <ul>
+        <h2 class="title">Sitemap</h2>
+        <ul class="ft-sitemap">
           <!-- pages controled by site config-->
           <li class="link">
             <a href="/" class:active={$page.url.pathname === "/"}>Home</a>
           </li>
-          {#each business.interiorPages as { name, path }}
-            <li class="link">
-              <a href={path} class:active={$page.url.pathname === path}>{name}</a>
+
+          {#each business.interiorPages as { name, path, subPages }}
+            <li
+              class="link"
+              class:active={$page.url.pathname.startsWith(path) ||
+                name.toLowerCase().replace(" ", "-").replace("-& ", "-") ===
+                  activeTopLevelWithSubpages}>
+              {#if subPages}
+                <a href={subPages[0].path}>
+                  {name}
+                </a>
+              {:else}
+                <a href={path}>{name}</a>
+              {/if}
             </li>
           {/each}
-          {#if business.includeBlog}
-            <li class="link">
-              <a
-                href="/blog"
-                class:active={$page.url.pathname === "/blog" ||
-                  $page.url.pathname.startsWith("/blog")}>Blog</a>
-            </li>
-          {/if}
         </ul>
       </div>
       <!-- Divider -->
       <div class="item">
-        <h2>Services</h2>
+        <h2 class="title">Contact Info</h2>
         <ul>
-          <li>
-            <a href="/services">Service Item</a>
-          </li>
-          <li>
-            <a href="/services">Service Item</a>
-          </li>
-          <li>
-            <a href="/services">Service Item</a>
-          </li>
-          <li>
-            <a href="/services">Service Item</a>
-          </li>
-          <li>
-            <a href="/services">Service Item</a>
-          </li>
-        </ul>
-      </div>
-      <!-- Divider -->
-      <div class="item">
-        <h2>Contact</h2>
-        <ul>
-          <li>
-            <a class="mail" href="mailto:{business.email}">Email: {business.email}</a>
-          </li>
-          <li>
-            <a
-              href="tel:{business.phone
-                .replace('(', '')
-                .replace(')', '')
-                .replace('-', '')
-                .replace(' ', '')}">
-              <span>Phone: </span>{business.phone}</a>
-          </li>
-          <li>
-            <SocialMedia />
-          </li>
+          <SocialMedia />
         </ul>
       </div>
     </div>
   </div>
-
-  <p class="credit">
-    <Copyright>
-      {business.name}
-    </Copyright>
-  </p>
+  <div class="credit">
+    <span>
+      <span>
+        Custom Coded & Designed by
+        <a href="https://www.rivaswebdesigns.com/" target="_blank"> Rivas Web Designs</a>
+      </span>
+      <span class="divider">|</span>
+      <span>
+        {business.name} &#169; {new Date().getFullYear()}
+      </span>
+    </span>
+  </div>
 </footer>

@@ -1,202 +1,230 @@
 footer {
-    width: 100%;
-    background-color: #191919;
-    padding: 3em 0 2em;
-    text-align: center;
-
-    @media only screen and (max-width: 767px) {
-        font-size: 1em;
-    }
+    display: block;
+    position: relative;
+    z-index: 400;
+    padding: 3em 0 0;
+    background-color: var(--primary);
 
     @media only screen and (min-width: 768px) {
-        padding: 5em 0 1em;
-        font-size: 1em;
-    }
-
-    @media only screen and (min-width: 1024px) {
-        font-size: inherit;
+        padding: 5em 0 0;
     }
 
     .container {
         display: flex;
-        align-items: center;
+        flex-wrap: wrap;
+        gap: (75/20em);
+        justify-content: center;
         flex-direction: column;
-        width: 96%;
-        max-width: (1200/20em);
-        margin: 0 auto 4em;
+        align-items: center;
+        padding-bottom: 3em;
 
-        @media only screen and (min-width: 768px) {
-            justify-content: space-between;
+        @media only screen and (min-width: 1024px) {
             align-items: flex-start;
+            justify-content: space-between;
             flex-direction: row;
+            padding-bottom: 5em;
         }
     }
 
-    .wrap {
-        display: flex;
-        flex-direction: column;
-        max-width: 20em;
-        width: 100%;
-        margin: 0;
+    a {
+        color: #fff;
+        transition: color .33s ease;
 
-        .item:nth-child(3) {
-            margin-bottom: 0;
+        &:hover,
+        &.active {
+            color: #000;
+        }
+    }
+
+    .logo {
+        @logowidth: 200;
+        @logoheight: 73;
+        .ib;
+        .va(top);
+        width: (@logowidth/20em);
+        height: (@logoheight/20em);
+
+        svg,
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    h2.title {
+        @fs: 20; //font-size
+        @lh: 18; //line-height
+        @marginbtm: 22;
+
+        display: block;
+        line-height: (@lh/@fs);
+        .fs(~'clamp( 12px,'(@fs/20em) ~','(@fs*1px) ~')');
+        .bold;
+        color: #fff;
+        margin-bottom: (@marginbtm/@fs*1em);
+    }
+
+    .mod {
+        display: inline-flex;
+        gap: (20/20em);
+        .va(top);
+
+        @media only screen and (max-width: 767px) {
+            width: 100%;
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 3em;
+            text-align: center;
+
+            .item {
+                max-width: (500/20em);
+            }
+
+            .ft-sitemap {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0 20px;
+            }
         }
 
         @media only screen and (min-width: 768px) {
-            max-width: max-content;
-            flex-direction: row;
-
-            .item {
-
-                &:nth-child(1),
-                &:nth-child(2) {
-                    margin-right: (88/20em);
-                }
-            }
+            gap: (100/20em);
         }
 
         ul {
             margin: 0;
-        }
-    }
-
-    .item {
-        display: block;
-        text-align: left;
-        margin-bottom: 2em;
-
-        &:nth-child(1) {
-            max-width: 20em;
-        }
-
-        @media only screen and(min-width: 768px) {
-            margin-bottom: 0;
-
-            &:nth-child(1) {
-                max-width: (300/20em);
-            }
-        }
-
-        h2 {
-            color: #fff;
-            font-weight: 700;
-            font-size: (22/20em);
-            text-transform: capitalize;
-            position: relative;
-
-            @media only screen and(min-width: 768px) {
-                font-size: (18/20em);
-            }
-
-            &::after {
-                content: '';
-                width: (32/16em);
-                height: (4/16em);
-                background-color: var(--primary-color);
-                display: block;
-                margin: (16/16em) 0 (16/16em);
-            }
-        }
-
-        ul {
             list-style: none;
 
             li {
-                margin-bottom: (16/20em);
+                margin-bottom: (0);
+                .fs(inherit);
 
-                &:nth-last-of-type(1) {
-                    margin-bottom: 0;
+                p {
+                    margin: 0;
+                    color: #fff;
                 }
 
-                .socialmedia {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    gap: .5em;
+                a {
+                    @fs: 16; //font-size
+                    @lh: 20; //line-height
+                    display: block;
+                    line-height: (@lh/@fs);
+                    .fs(~'clamp( 12px,'(@fs/20em) ~','(@fs*1px) ~')');
 
+                    @media only screen and (max-width: 1023px) {
+                        .lh(44px);
+                        .fs(16px);
+                    }
+                }
+
+                &.active {
                     a {
-                        display: block;
-                        width: 20px;
-                        height: 20px;
-                        transition: transform .33s ease;
-
-                        svg {
-                            display: inline-block;
-                            width: 100%;
-                            height: 100%;
-                        }
-
-                        &:hover {
-                            transform: scale(1.2);
-                        }
+                        color: #000;
                     }
                 }
             }
         }
     }
 
-    .logo {
+    // credit 
+    .credit {
+        padding: .5em 0;
         display: block;
-        width: (300/20em);
-        margin: 0 auto (40/20em);
+        background-color: #212121;
+        text-align: center;
+        color: #fff;
 
-        svg,
-        img {
-            width: 50%;
-            height: auto;
-            display: block;
+        @media only screen and (max-width: 767px) {
+            span {
+                display: block;
+
+                &.divider {
+                    display: none;
+                }
+            }
         }
 
-        @media only screen and(min-width: 1024px) {
-            margin: 0 0 (40/20em);
+        span {
+            margin: 0 auto;
+            font-size: min(14px, 5vw);
+            line-height: 1.5;
+            width: 90%;
 
-            svg,
-            img {
-                // width: 100%;
+            a {
+                &:hover {
+                    color: var(--primary);
+                }
             }
         }
     }
+}
 
-    .slogan {
-        color: white;
-        width: 100%;
-    }
+// social media
+/* ===============================================
+	socialmedia
+=============================================== */
+footer .socialmedia {
+    @icondim: 40; //social-icon height (and often width) from psd proof
+    @iconfs: 20; //social-icon font-size from psd proof
+
+    line-height: 0;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    .if;
+    .va(top);
+    justify-content: center;
+    position: relative;
+    z-index: 300;
+    gap: 5px;
+    // desk 1300w
 
     a {
-        color: #fff;
-        text-decoration: none;
-        text-transform: capitalize;
-        transition: color .33s ease;
-        display: block;
+        background-color: var(--secondary);
+        min-width: 24px; // mandatory minimum desktop target size
+        min-height: 24px; // mandatory minimum desktop target size
+        .if;
+        .jc(center);
+        .ai(center);
+        vertical-align: top;
+        position: relative;
+        transition: transform 0.33s ease-in-out, color 0.33s ease-in-out;
+        .lh(0);
 
-        @media only screen and(min-width: 768px) {
-            font-size: (16/20em);
+        @media only screen and (max-width: 1023px) {
+            width: 44px; // mandatory minimum mob tap-target size
+            height: 44px; // mandatory minimum mob tap-target size
         }
 
-        &.mail {
-            text-transform: none;
+        // midTab 1024oo 
+        @media only screen and (min-width: 1024px) {
+            height: ((@icondim/@iconfs)*1em);
+            min-width: 18px;
+            width: ((@icondim/@iconfs)*1em); //for slimmer icons: uncomment and adjust the multiplier
         }
 
-        &:hover,
-        &.active {
-            color: var(--primary-color);
-        }
-    }
-
-    .credit {
-        display: block;
-        color: #fff;
-        margin: auto;
-
-        @media only screen and(min-width: 768px) {
-            font-size: (16/20em);
+        svg {
+            width: 50%;
         }
 
-        a {
-            display: inline-block;
-            font-size: inherit;
-            color: var(--primary-color);
+        // maxTab 1024w
+
+        &:nth-last-of-type(1) {
+            margin: 0;
+        }
+
+        &:hover {
+            color: var(--secondary);
+            z-index: 400;
+            transform: translate(0, 0) scale(1.44);
+        }
+
+        .icon {
+            position: relative;
         }
     }
 }
