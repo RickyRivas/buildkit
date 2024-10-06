@@ -138,8 +138,7 @@
       const formData = new FormData(form)
 
       // google recaptcha is also included in the form data. remove.
-      // UNCOMMENT WHEN RECAPTCHA ACCOUNT IS SET
-      // formData.delete("g-recaptcha-response")
+      formData.delete("g-recaptcha-response")
 
       let formattedForUrl = new URLSearchParams(formData).toString()
       const response = await fetch("/contactform.html", {

@@ -3,7 +3,8 @@
 <head></head>
 
 <body>
-    <form name="contact" action="/" data-netlify="true" hidden>
+    <!-- remove enctype="multipart/form-data" if no file upload-->
+    <form name="contact" action="/" data-netlify="true" enctype="multipart/form-data" hidden>
         <input type="hidden" name="form-name" value="contact" />
         <input name="Name" type="text" />
         <select name="Subject">
