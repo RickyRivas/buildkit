@@ -29,26 +29,6 @@ export const business = {
                     description: "",
                     imageURL: "",
                     sidebar: true,
-                },
-                {
-                    name: "By Laws",
-                    path: "/docs/BY-LAWS.PDF",
-                    title: "By Laws",
-                },
-                {
-                    name: "Covenants",
-                    path: "/docs/COVENANTS.PDF",
-                    title: "Covenants",
-                },
-                {
-                    name: "Oxford Park I",
-                    path: "/docs/Oxford-Park-Plat-and-DD.pdf",
-                    title: "Oxford Park I",
-                },
-                {
-                    name: "Oxford Park II",
-                    path: "/docs/Oxford-Park-II-division.pdf",
-                    title: "Oxford Park II",
                 }
             ]
         },

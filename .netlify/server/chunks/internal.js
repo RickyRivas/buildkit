@@ -1,7 +1,11 @@
-import { c as create_ssr_component, b as setContext, v as validate_component, m as missing_component } from "./ssr.js";
+import { c as create_ssr_component, f as setContext, v as validate_component, m as missing_component } from "./ssr.js";
 let base = "";
 let assets = base;
 const initial = { base, assets };
+function override(paths) {
+  base = paths.base;
+  assets = paths.assets;
+}
 function reset() {
   base = initial.base;
   assets = initial.assets;
@@ -10,14 +14,22 @@ function set_assets(path) {
   assets = initial.assets = path;
 }
 let public_env = {};
+let safe_public_env = {};
 function set_private_env(environment) {
 }
 function set_public_env(environment) {
   public_env = environment;
 }
+function set_safe_public_env(environment) {
+  safe_public_env = environment;
+}
 function afterUpdate() {
 }
+let prerendering = false;
 function set_building() {
+}
+function set_prerendering() {
+  prerendering = true;
 }
 const Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { stores } = $$props;
@@ -47,8 +59,10 @@ const Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.data_1(data_1);
   let $$settled;
   let $$rendered;
+  let previous_head = $$result.head;
   do {
     $$settled = true;
+    $$result.head = previous_head;
     {
       stores.page.set(page);
     }
@@ -90,11 +104,15 @@ const Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   } while (!$$settled);
   return $$rendered;
 });
+function set_read_implementation(fn) {
+}
+function set_manifest(_) {
+}
 const options = {
+  app_dir: "_app",
   app_template_contains_nonce: false,
   csp: { "mode": "auto", "directives": { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, "reportOnly": { "upgrade-insecure-requests": false, "block-all-mixed-content": false } },
   csrf_check_origin: true,
-  track_server_fetches: false,
   embedded: false,
   env_public_prefix: "PUBLIC_",
   env_private_prefix: "",
@@ -104,8 +122,8 @@ const options = {
   root: Root,
   service_worker: false,
   templates: {
-    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en" data-theme="">\n\n<head>\n	<meta charset="utf-8" />\n	<meta name="viewport" content="width=device-width" />\n\n	<!-- Business -->\n	<!-- <meta name="keywords" content=""> -->\n\n	<!--Social Media Display-->\n	<meta property="og:type" content="website">\n	<meta property="og:image" content="/og.jpg">\n	<meta property="og:image:secure_url" content="/">\n\n	<!-- Favicons generate from https://realfavicongenerator.net/ -->\n\n	<!-- fonts -->\n	<link rel="preconnect" href="https://fonts.googleapis.com">\n	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n	<link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500&display=swap" rel="stylesheet">\n\n	' + head + '\n</head>\n\n<body data-sveltekit-preload-data="hover">\n	<div style="display: contents">' + body + "</div>\n</body>\n\n</html>",
-    error: ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
+    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en" data-theme="">\n\n<head>\n	<meta charset="utf-8" />\n	<meta name="viewport" content="width=device-width" />\n	<link rel="shortcut icon" href="/favicon.png" type="image/x-icon">\n\n	<!-- Favicons generate from https://realfavicongenerator.net/ -->\n\n	<!-- fonts -->\n	<link rel="preconnect" href="https://fonts.googleapis.com">\n	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n	<link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500&display=swap" rel="stylesheet">\n\n	' + head + '\n</head>\n\n<body data-sveltekit-preload-data="hover">\n	<div style="display: contents">' + body + "</div>\n</body>\n\n</html>",
+    error: ({ status, message }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
 			body {
@@ -114,8 +132,18 @@ const options = {
 				--divider: #ccc;
 				background: var(--bg);
 				color: var(--fg);
-				font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-					Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+				font-family:
+					system-ui,
+					-apple-system,
+					BlinkMacSystemFont,
+					'Segoe UI',
+					Roboto,
+					Oxygen,
+					Ubuntu,
+					Cantarell,
+					'Open Sans',
+					'Helvetica Neue',
+					sans-serif;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -166,20 +194,29 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "lgseqh"
+  version_hash: "kwtkcf"
 };
-function get_hooks() {
-  return {};
+async function get_hooks() {
+  return {
+    ...await import("./hooks.server.js")
+  };
 }
 export {
   assets as a,
   base as b,
-  set_public_env as c,
-  set_assets as d,
-  set_building as e,
+  options as c,
+  set_private_env as d,
+  prerendering as e,
+  set_public_env as f,
   get_hooks as g,
-  options as o,
+  set_safe_public_env as h,
+  set_assets as i,
+  set_building as j,
+  set_manifest as k,
+  set_prerendering as l,
+  set_read_implementation as m,
+  override as o,
   public_env as p,
   reset as r,
-  set_private_env as s
+  safe_public_env as s
 };

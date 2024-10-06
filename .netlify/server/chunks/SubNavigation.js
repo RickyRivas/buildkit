@@ -1,15 +1,15 @@
-import { c as create_ssr_component, e as escape } from "./ssr.js";
-const SubNavigation_svelte_svelte_type_style_lang = "";
-const css = {
-  code: '#subheader.svelte-129sks3.svelte-129sks3{background:#000;display:flex;justify-content:center;align-items:flex-end;padding:8em 0 2em;position:relative;isolation:isolate}@media only screen and (min-width: 768px){#subheader.svelte-129sks3.svelte-129sks3{text-align:left;padding:0 0 3em 0;height:18.65em}}#subheader.svelte-129sks3.svelte-129sks3::before{content:"";width:100%;height:100%;position:absolute;top:0;left:0;z-index:-1;background:linear-gradient(90.01deg, #27631a 16.86%, rgba(0, 0, 0, 0) 100%)}#subheader.svelte-129sks3 .container.svelte-129sks3{text-align:center;width:96%;max-width:60em;margin:0 auto}@media only screen and (min-width: 768px){#subheader.svelte-129sks3 .container.svelte-129sks3{text-align:left}}#subheader.svelte-129sks3 h1.svelte-129sks3{color:white;font-weight:bold;font-size:2.45em;line-height:1.2;text-transform:uppercase}',
-  map: null
-};
+import { c as create_ssr_component, b as add_attribute, e as escape } from "./ssr.js";
+import { b as business } from "./stores.js";
 const SubNavigation = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { pageTitle } = $$props;
+  let { pageTitle, pageName, pagePath } = $$props;
+  let subnav;
   if ($$props.pageTitle === void 0 && $$bindings.pageTitle && pageTitle !== void 0)
     $$bindings.pageTitle(pageTitle);
-  $$result.css.add(css);
-  return `<section id="subheader" class="svelte-129sks3"><div class="container svelte-129sks3"><h1 class="svelte-129sks3">${escape(pageTitle)}</h1></div> </section>`;
+  if ($$props.pageName === void 0 && $$bindings.pageName && pageName !== void 0)
+    $$bindings.pageName(pageName);
+  if ($$props.pagePath === void 0 && $$bindings.pagePath && pagePath !== void 0)
+    $$bindings.pagePath(pagePath);
+  return `<section id="subheader"${add_attribute("this", subnav, 0)}><div class="container"><span class="subnav-subheading">${escape(business.name)}</span> <h1>${escape(pageTitle)}</h1> <div class="mod"><a class="prev-page" href="/" data-svelte-h="svelte-1u4dym4">Home</a> <span class="line"></span> <a class="current-page"${add_attribute("href", pagePath, 0)}>${escape(pageName)}</a></div></div></section>`;
 });
 export {
   SubNavigation as S

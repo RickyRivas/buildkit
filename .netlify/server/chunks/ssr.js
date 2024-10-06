@@ -23,7 +23,10 @@ function subscribe(store, ...callbacks) {
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
 function null_to_empty(value) {
-  return value == null ? "" : value;
+  return value;
+}
+function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
+  return new CustomEvent(type, { detail, bubbles, cancelable });
 }
 let current_component;
 function set_current_component(component) {
@@ -33,6 +36,25 @@ function get_current_component() {
   if (!current_component)
     throw new Error("Function called outside component initialization");
   return current_component;
+}
+function createEventDispatcher() {
+  const component = get_current_component();
+  return (type, detail, { cancelable = false } = {}) => {
+    const callbacks = component.$$.callbacks[type];
+    if (callbacks) {
+      const event = custom_event(
+        /** @type {string} */
+        type,
+        detail,
+        { cancelable }
+      );
+      callbacks.slice().forEach((fn) => {
+        fn.call(component, event);
+      });
+      return !event.defaultPrevented;
+    }
+    return true;
+  };
 }
 function setContext(key, context) {
   get_current_component().$$.context.set(key, context);
@@ -119,24 +141,25 @@ function create_ssr_component(fn) {
   };
 }
 function add_attribute(name, value, boolean) {
-  if (value == null || boolean && !value)
+  if (value == null || boolean)
     return "";
-  const assignment = boolean && value === true ? "" : `="${escape(value, true)}"`;
+  const assignment = `="${escape(value, true)}"`;
   return ` ${name}${assignment}`;
 }
 function add_classes(classes) {
   return classes ? ` class="${classes}"` : "";
 }
 export {
-  add_attribute as a,
-  setContext as b,
+  each as a,
+  add_attribute as b,
   create_ssr_component as c,
-  each as d,
+  createEventDispatcher as d,
   escape as e,
-  add_classes as f,
+  setContext as f,
   getContext as g,
-  noop as h,
-  safe_not_equal as i,
+  add_classes as h,
+  noop as i,
+  safe_not_equal as j,
   missing_component as m,
   null_to_empty as n,
   subscribe as s,
