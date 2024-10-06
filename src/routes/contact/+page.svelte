@@ -136,8 +136,11 @@
       // Yes. 2 forms. but atleast it works when this page is SSRD!
       // input names must match on each form fields
       const formData = new FormData(form)
+
       // google recaptcha is also included in the form data. remove.
-      formData.delete("g-recaptcha-response")
+      // UNCOMMENT WHEN RECAPTCHA ACCOUNT IS SET
+      // formData.delete("g-recaptcha-response")
+
       let formattedForUrl = new URLSearchParams(formData).toString()
       const response = await fetch("/contactform.html", {
         method: "POST",
