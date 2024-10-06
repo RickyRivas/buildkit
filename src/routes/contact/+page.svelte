@@ -5,6 +5,7 @@
   import SubNavigation from "$lib/components/SubNavigation.svelte"
   import InteriorLayout from "$lib/components/InteriorLayout.svelte"
   import AnchorButton from "$lib/components/AnchorButton.svelte"
+  import Modal from "$lib/components/Modal.svelte"
 
   // stores
   import { business } from "$lib/config"
@@ -16,7 +17,7 @@
   let thisPage = findPage(business, $page.route.id)
 
   let form
-  let showModal = false
+  let showModal = true
   let loading = false
   let success = false
   let error = false
@@ -70,6 +71,15 @@
   author=""
   name="" />
 <SubNavigation pageTitle={thisPage?.title} pagePath={thisPage.path} pageName={thisPage.name} />
+
+{#if showModal}
+  <Modal
+    on:escape={() => {
+      showModal = false
+    }}>
+    <p>Our reservation booking software is temporarily unavailable. Please check back soon.</p>
+  </Modal>
+{/if}
 
 <InteriorLayout bind:thisPage>
   <h2>Get in touch.</h2>
