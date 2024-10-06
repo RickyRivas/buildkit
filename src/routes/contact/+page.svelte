@@ -141,26 +141,20 @@
       const formData = new FormData(form)
 
       // google recaptcha is also included in the form data. remove.
-      // UNCOMMENT
-      // formData.delete("g-recaptcha-response")
-
-      let formattedForUrl = new URLSearchParams(formData).toString()
+      formData.delete("g-recaptcha-response")
       const response = await fetch("/contactform.html", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: formattedForUrl,
+        body: formData,
       })
-
-      console.log(formattedForUrl)
 
       // TODO: custom form success page
       if (response.ok) {
         message = "We have received your submission. Thank you."
         loading = false
         success = true
-        // setTimeout(() => {
-        //   goto("/")
-        // }, 3000)
+        setTimeout(() => {
+          goto("/")
+        }, 3000)
       }
       cancel()
     }}>
