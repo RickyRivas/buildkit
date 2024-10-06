@@ -1,0 +1,203 @@
+@border: 2px solid var(--form-bordercolor);
+@fs: 16px;
+
+// all forms 
+form:not(.custom) {
+    display: block;
+    width: 100%;
+    border-radius: var(--border-radius);
+    background-color: var(--form-bg);
+    box-shadow: var(--box-shadow);
+    border: @border;
+    padding: (48/20em) (32/20em);
+}
+
+// form control default
+.form-control {
+    display: block;
+    position: relative;
+    width: 100%;
+
+    // flatpickr/daypicker.svelte bug fix
+    &:not(.input) {
+        margin-bottom: 1em;
+    }
+
+    &.dropdownactive[class] {
+        z-index: 1777;
+
+        input {
+            border-color: var(--primary);
+            z-index: 1200;
+        }
+    }
+}
+
+label {
+    color: var(--heading);
+    display: block;
+    .fs(@fs);
+}
+
+select {
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='512pt' viewBox='0 -93 512 512' width='512pt'%3E%3Cpath d='m441.667969 0-185.667969 185.667969-185.667969-185.667969-70.332031 70.332031 256 256 256-256zm0 0'/%3E%3C/svg%3E");
+    background-position: right 0.75em center;
+    background-repeat: no-repeat;
+    background-size: (14/20em);
+}
+
+input:not([type='checkbox']):not([type='radio']):not(.numInput),
+textarea,
+select {
+    display: block;
+    width: 100%;
+    box-shadow: var(--light-box-shadow);
+    border-radius: var(--form-borderradius);
+    background-color: var(--form-field);
+    position: relative;
+    color: var(--form-text);
+    border: @border;
+    transition: border-color .33s ease,
+        background-color .33s ease,
+        color .33s ease;
+    font: inherit;
+    outline: none;
+    .fs(@fs);
+    .lh((50/16));
+    resize: none;
+    padding: 0 1em;
+
+    &.error {
+        border-color: var(--form-field-error);
+        background-color: var(--form-field-error-bg);
+        color: #4E4B66;
+    }
+
+    &:focus,
+    &:active {
+        border-color: var(--primary);
+    }
+
+    &:not([id]):disabled {
+        cursor: not-allowed;
+    }
+
+    &::placeholder {
+        color: var(--form-placeholder);
+    }
+
+    &.success {
+        border-color: var(--form-field-success);
+        background-color: var(--form-field-success-bg);
+        color: #4E4B66;
+    }
+
+    &:focus,
+    &:active {
+        border-color: var(--primary);
+    }
+}
+
+.custom-hidden-form-input {
+    display: none !important;
+}
+
+textarea {
+    height: 10em;
+    line-height: 1.2;
+    padding: 1em;
+}
+
+// all other custom stuff
+// custom file upload inpit
+.form-controls-uploads {
+    width: 100%;
+    display: flex;
+    gap: 1em;
+
+    // label needs to be styled since that will be what initiates the modal
+    .form-control {
+
+        label {
+            border: 1px dashed #5b5650;
+            text-align: center;
+            padding: 1em;
+            background-color: var(--form-field);
+            font-size: 14px;
+            height: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1em;
+            flex-direction: column;
+            transition: border-color .33s ease, background-color .33s ease;
+
+            &.success {
+                border-color: var(--form-field-success);
+                background-color: var(--form-field-success-bg);
+            }
+
+            &.error {
+                border-color: var(--form-field-error);
+                background-color: var(--form-field-error-bg);
+            }
+
+        }
+
+        input {
+            box-shadow: none;
+            border: 0;
+            background: none;
+        }
+    }
+
+    .icon {
+        display: block;
+        width: 2em;
+        line-height: 0;
+    }
+}
+
+// checkbox group
+
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1em;
+    padding: 1em 0;
+
+    label {
+        font-size: 14px;
+        // width: calc(50% - 1em);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: .5em;
+        background-color: var(--form-field);
+        white-space: nowrap;
+        padding: .25em .5em;
+        border-radius: var(--form-borderradius);
+        box-shadow: var(--light-box-shadow);
+        border: @border;
+    }
+}
+
+.flex-form-column-gap {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.form-controls-flex {
+    gap: 1em;
+    display: flex;
+}
+
+[data-theme='dark'] {
+    form.style-one .form-control select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='512pt' viewBox='0 -93 512 512' width='512pt'%3E%3Cpath d='m441.667969 0-185.667969 185.667969-185.667969-185.667969-70.332031 70.332031 256 256 256-256zm0 0' fill='%23fff'/%3E%3C/svg%3E");
+    }
+}

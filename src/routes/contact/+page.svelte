@@ -1,6 +1,7 @@
 <script lang="ts">
   // components
   import SubNavigation from "$lib/components/SubNavigation.svelte"
+  import InteriorLayout from "$lib/components/InteriorLayout.svelte"
 
   // stores
   import { business } from "$lib/config"
@@ -8,7 +9,8 @@
   import SEO from "$lib/components/SEO.svelte"
 
   // logic
-  const thisPage = business.interiorPages.find((p) => p.path === $page.route.id)
+  import { findPage } from "$lib/utils"
+  let thisPage = findPage(business, $page.route.id)
 
   // file size upload (If needed)
   // let fileUploadInput: any
@@ -38,109 +40,48 @@
   logo=""
   author=""
   name="" />
-<SubNavigation pageTitle={thisPage?.title} />
+<SubNavigation pageTitle={thisPage?.title} pagePath={thisPage.path} pageName={thisPage.name} />
 
-<main>
-  <section id="contact-landing">
-    <div class="form-container">
-      <h2>Get in touch.</h2>
-      <p>
-        Let us know if you have any questions or would like to talk about a potential project. We
-        respond to every call or email we get!
-      </p>
-      <div class="contact-items">
-        <div class="item">
-          <span>Call Us</span>
-          <a
-            href="tel:{business.phone
-              .replace('(', '')
-              .replace(')', '')
-              .replace('-', '')
-              .replace(' ', '')}">{business.phone}</a>
-        </div>
-        <div class="item">
-          <span>Email Us</span>
-          <a href="mailto:{business.email}">{business.email}</a>
-        </div>
-        <div class="item">
-          <span>Follow Us</span>
-          <div class="socials">
-            <a
-              href="https://www.facebook.com/profile.php?id=100091290063493"
-              class="icon fb"
-              target="_blank"
-              ><svg
-                width="25"
-                height="25"
-                viewBox="0 0 25 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                role="img"
-                ><path
-                  d="M14.4361 25V13.5972H18.262L18.836 9.15195H14.4361V6.31434C14.4361 5.02775 14.7919 4.15095 16.639 4.15095L18.9909 4.14999V0.174037C18.5842 0.121182 17.188 0 15.563 0C12.1698 0 9.84668 2.07121 9.84668 5.87409V9.15195H6.00916V13.5972H9.84668V25H14.4361Z"
-                  fill="currentcolor" /></svg>
-              <span class="screenreader">Follow us on Facebook</span></a>
-            <a
-              href="https://www.instagram.com/ink_bros_custom_apparel/"
-              class="icon"
-              target="_blank"
-              ><svg
-                width="26"
-                height="25"
-                viewBox="0 0 26 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                role="img"
-                ><path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M24.9756 7.35007C24.917 6.02172 24.7022 5.1085 24.3945 4.31717C24.077 3.4772 23.5887 2.72518 22.9488 2.10002C22.3237 1.46513 21.5667 0.971793 20.7364 0.659308C19.9405 0.351593 19.0321 0.136784 17.7037 0.0782166C16.3655 0.0146895 15.9406 0 12.5464 0C9.15217 0 8.72732 0.0146895 7.39401 0.0732565C6.06567 0.131824 5.15244 0.346824 4.36131 0.654348C3.52115 0.971793 2.76913 1.46017 2.14397 2.10002C1.50908 2.72518 1.01593 3.48216 0.703255 4.3124C0.395539 5.1085 0.18073 6.01676 0.122163 7.34511C0.0586357 8.68338 0.0439453 9.10822 0.0439453 12.5024C0.0439453 15.8967 0.0586357 16.3215 0.117203 17.6548C0.17577 18.9832 0.39077 19.8964 0.698485 20.6877C1.01593 21.5277 1.50908 22.2797 2.14397 22.9049C2.76913 23.5398 3.52611 24.0331 4.35635 24.3456C5.15244 24.6533 6.06071 24.8681 7.38925 24.9267C8.72236 24.9854 9.1474 24.9999 12.5416 24.9999C15.9358 24.9999 16.3607 24.9854 17.694 24.9267C19.0223 24.8681 19.9356 24.6533 20.7267 24.3456C22.4068 23.696 23.7352 22.3677 24.3848 20.6877C24.6923 19.8916 24.9073 18.9832 24.9658 17.6548C25.0244 16.3215 25.0391 15.8967 25.0391 12.5024C25.0391 9.10822 25.0341 8.68338 24.9756 7.35007ZM22.7243 17.5571C22.6705 18.7781 22.4654 19.4374 22.2945 19.8769C21.8744 20.966 21.01 21.8304 19.9209 22.2505C19.4813 22.4214 18.8173 22.6265 17.6011 22.6801C16.2825 22.7389 15.887 22.7534 12.5513 22.7534C9.2157 22.7534 8.81527 22.7389 7.50142 22.6801C6.28048 22.6265 5.62117 22.4214 5.18163 22.2505C4.63965 22.0502 4.14631 21.7328 3.74588 21.3176C3.33076 20.9123 3.01331 20.4239 2.813 19.8819C2.64207 19.4424 2.43699 18.7781 2.38338 17.5621C2.32463 16.2435 2.31013 15.8478 2.31013 12.5122C2.31013 9.17652 2.32463 8.77609 2.38338 7.46243C2.43699 6.24149 2.64207 5.58218 2.813 5.14264C3.01331 4.60047 3.33076 4.10732 3.75084 3.7067C4.15604 3.29158 4.64442 2.97414 5.18659 2.77402C5.62613 2.60309 6.2904 2.39801 7.50638 2.34421C8.825 2.28564 9.22066 2.27095 12.5561 2.27095C15.8967 2.27095 16.2922 2.28564 17.606 2.34421C18.827 2.39801 19.4863 2.60309 19.9258 2.77402C20.4678 2.97414 20.9612 3.29158 21.3616 3.7067C21.7767 4.11209 22.0942 4.60047 22.2945 5.14264C22.4654 5.58218 22.6705 6.24626 22.7243 7.46243C22.7828 8.78105 22.7975 9.17652 22.7975 12.5122C22.7975 15.8478 22.7828 16.2385 22.7243 17.5571ZM12.5464 6.08029C9.00089 6.08029 6.12424 8.95675 6.12424 12.5024C6.12424 16.0481 9.00089 18.9246 12.5464 18.9246C16.0921 18.9246 18.9685 16.0481 18.9685 12.5024C18.9685 8.95675 16.0921 6.08029 12.5464 6.08029ZM12.5464 16.6683C10.2462 16.6683 8.3805 14.8028 8.3805 12.5024C8.3805 10.2021 10.2462 8.33655 12.5464 8.33655C14.8467 8.33655 16.7123 10.2021 16.7123 12.5024C16.7123 14.8028 14.8467 16.6683 12.5464 16.6683ZM19.2225 7.32565C20.0506 7.32565 20.7219 6.65432 20.7219 5.82637C20.7219 4.99823 20.0506 4.32709 19.2225 4.32709C18.3945 4.32709 17.7232 4.99823 17.7232 5.82637C17.7232 6.65432 18.3945 7.32565 19.2225 7.32565Z"
-                  fill="currentcolor" /></svg>
-              <span class="screenreader">Follow us on Instagram</span></a>
-          </div>
-        </div>
-      </div>
-      <form
-        id="contact-form"
-        method="post"
-        name="contact"
-        netlify="true"
-        enctype="multipart/form-data">
-        <input type="hidden" name="form-name" value="contact" />
-        <div class="form-control">
-          <label for="fname">Name</label>
-          <input id="fname" type="text" name="Client Name" placeholder="John Doe" required />
-        </div>
-        <div class="form-control">
-          <label for="email-input">Email</label>
-          <input id="email-input" type="email" name="Email" placeholder="you@email.com" required />
-        </div>
-        <div class="form-control">
-          <label for="phone-input">Phone Number</label>
-          <input
-            id="phone-input"
-            type="number"
-            name="number"
-            placeholder="+1 (918) 000-0000"
-            required="" />
-        </div>
-        <div class="form-control">
-          <label for="referral-input">How did you hear about us?</label>
-          <input
-            id="referral-input"
-            type="text"
-            name="Referral"
-            placeholder="Facebook, Referral, Google"
-            required="" />
-        </div>
-        <div class="form-control">
-          <label for="message-input">How can we help?</label>
-          <textarea id="message-input" name="message" cols="20" rows="5" placeholder="" />
-        </div>
-        <!-- Uncomment for file uploads -->
-        <!-- <div class="form-control">
+<InteriorLayout bind:thisPage>
+  <h2>Get in touch.</h2>
+  <p>
+    Let us know if you have any questions or would like to talk about a potential project. We
+    respond to every call or email we get!
+  </p>
+  <form id="contact-form" method="post" name="contact" netlify="true" enctype="multipart/form-data">
+    <input type="hidden" name="form-name" value="contact" />
+    <div class="form-control">
+      <label for="fname">Name</label>
+      <input id="fname" type="text" name="Client Name" placeholder="John Doe" required />
+    </div>
+    <div class="form-control">
+      <label for="email-input">Email</label>
+      <input id="email-input" type="email" name="Email" placeholder="you@email.com" required />
+    </div>
+    <div class="form-control">
+      <label for="phone-input">Phone Number</label>
+      <input
+        id="phone-input"
+        type="number"
+        name="number"
+        placeholder="+1 (918) 000-0000"
+        required="" />
+    </div>
+    <div class="form-control">
+      <label for="referral-input">How did you hear about us?</label>
+      <input
+        id="referral-input"
+        type="text"
+        name="Referral"
+        placeholder="Facebook, Referral, Google"
+        required="" />
+    </div>
+    <div class="form-control">
+      <label for="message-input">How can we help?</label>
+      <textarea id="message-input" name="message" cols="20" rows="5" placeholder="" />
+    </div>
+    <!-- Uncomment for file uploads -->
+    <!-- <div class="form-control">
         <label for="design-upload">Upload your design:</label>
         <input
           name="file"
@@ -149,21 +90,11 @@
           on:change={checkFileSize}
           accept="image/*" />
       </div> -->
-        <!-- recaptcha -->
-        <!-- <div class="g-recaptcha" style="margin-bottom: 1em;" id="g-recaptcha" data-sitekey="" /> -->
-        <button id="submit" disabled>
-          <span> Submit Form </span>
-        </button>
-        <!-- -->
-      </form>
-    </div>
-    <img
-      class="side-stock"
-      src="/contactside.jpg"
-      alt="clothes"
-      width="648"
-      height="800"
-      loading="lazy"
-      decoding="async" />
-  </section>
-</main>
+    <!-- recaptcha -->
+    <!-- <div class="g-recaptcha" style="margin-bottom: 1em;" id="g-recaptcha" data-sitekey="" /> -->
+    <button id="submit" disabled>
+      <span> Submit Form </span>
+    </button>
+    <!-- -->
+  </form>
+</InteriorLayout>

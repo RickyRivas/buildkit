@@ -26,7 +26,5 @@
   schemaOrg={false} />
 
 <InteriorLayout bind:thisPage>
-  <section id="blog-post">
-    <Content />
-  </section>
+  <Content />
 </InteriorLayout>

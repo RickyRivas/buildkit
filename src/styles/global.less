@@ -91,6 +91,8 @@ body {
     overflow: hidden;
     display: block;
     position: relative;
+    color: var(--text);
+    background-color: var(--bg);
 
     @media (min-width: 1300px) {
         font-size: 20px;
@@ -181,8 +183,8 @@ a {
 /* ===============================================
 	h family || hfam 
 =============================================== */
-@h2fs: 25;
-@h3fs: 23;
+@h2fs: 49;
+@h3fs: 20;
 @h4fs: 21;
 @h5fs: 20;
 @h6fs: 19;
@@ -195,8 +197,8 @@ h5,
 h6 {
     line-height: 1;
     text-align: left;
-    color: @headingcolor;
-    margin: 0 0 (15/@h2fs)*1em;
+    color: var(--heading);
+    margin: 0 0 (40/@h2fs)*1em;
     text-rendering: auto;
     text-transform: capitalize
 }
