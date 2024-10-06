@@ -7,21 +7,10 @@ export const business = {
     phone: '(918) 123-4567',
     address: '1234 East Tulsa, Ok 12345',
     email: 'biz@email.com',
-    // Set to true if client opts for blog
-    includeBlog: true,
     homepage: {
         metaDescription: "This is the homepage description",
     },
     interiorPages: [
-        {
-            name: "News",
-            path: "/newsletter",
-            title: "Our Newsletter",
-            description: "",
-            imageURL: "",
-            sidebar: true,
-            sidebarComponent: 'subscribex'
-        },
         {
             name: "Documents",
             subPages: [
@@ -34,13 +23,12 @@ export const business = {
                     sidebar: true,
                 },
                 {
-                    name: "ARC Form",
-                    path: "/arc",
-                    title: "ARC Form",
+                    name: "Sub Documents",
+                    path: "/subdocuments",
+                    title: "All Sub Documents",
                     description: "",
                     imageURL: "",
                     sidebar: true,
-                    sidebarComponent: 'subscribex'
                 },
                 {
                     name: "By Laws",
@@ -65,21 +53,13 @@ export const business = {
             ]
         },
         {
-            name: "Events",
-            path: "/events",
-            title: "Upcoming Activities & Events",
+            name: "faq",
+            path: "/faq",
+            title: "Frequently Asked Questions",
             description: "",
             imageURL: "",
             sidebar: true,
             sidebarComponent: 'subscribex'
-        },
-        {
-            name: "Reservations",
-            path: "/reservations",
-            title: "Make a reservation",
-            description: "",
-            imageURL: "",
-            sidebar: true
         },
         {
             name: "About",
@@ -87,43 +67,30 @@ export const business = {
             title: "About Us",
             description: "",
             imageURL: "",
-            sidebar: false
+            sidebar: true
         },
         {
-            name: "Resources",
-            subPages: [
-                {
-                    name: "Helpful Links",
-                    path: "/helpful-links",
-                    title: "Helpful Links",
-                    description: "",
-                    imageURL: "",
-                    sidebar: true
-                },
-                {
-                    name: "Preferred Business",
-                    path: "/preferred-business",
-                    title: "Preferred Business",
-                    description: "",
-                    imageURL: "",
-                    sidebar: true
-                },
-                {
-                    name: "Subscribe",
-                    path: "/subscribe",
-                    title: "Subscribe",
-                    description: "",
-                    imageURL: "",
-                    sidebar: true,
-                    hideBottomCTA: true
-                },
-            ]
+            name: "Services",
+            path: "/services",
+            title: "Our Services",
+            description: "",
+            imageURL: "",
+            sidebar: true
         },
         {
             name: "Contact",
             path: "/contact",
             title: "Contact Us",
             description: "Contact Page Description",
+            imageURL: "",
+            sidebar: true
+        },
+        // if client opts for blog
+        {
+            name: "Blog",
+            path: "/blog",
+            title: "Our Blog",
+            description: "Blog Page Description",
             imageURL: "",
             sidebar: true
         },

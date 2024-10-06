@@ -1,58 +1,28 @@
-<script lang="ts">
+<script>
+  import { browser } from "$app/environment"
+  import { business } from "$lib/config"
+  import { onMount } from "svelte"
   // components
   // stores
   // styles
   // logic
   // props
-  export let pageTitle: any
+  export let pageTitle, pageName, pagePath
+
+  let subnav
+  onMount(() => {
+    // subnav.style.backgroundImage = `url(/subnav0${Math.floor(Math.random() * 4) + 1}.jpg)`
+  })
 </script>
 
-<section id="subheader">
+<section bind:this={subnav} id="subheader">
   <div class="container">
+    <span class="subnav-subheading">{business.name}</span>
     <h1>{pageTitle}</h1>
+    <div class="mod">
+      <a class="prev-page" href="/">Home</a>
+      <span class="line"></span>
+      <a class="current-page" href={pagePath}>{pageName}</a>
+    </div>
   </div>
 </section>
-
-<style lang="less">
-  #subheader {
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding: 8em 0 2em;
-    position: relative;
-    isolation: isolate;
-    @media only screen and(min-width: 768px) {
-      text-align: left;
-      padding: 0 0 3em 0;
-      height: (373/20em);
-    }
-    &::before {
-      content: "";
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      background: linear-gradient(90.01deg, #27631a 16.86%, rgba(0, 0, 0, 0) 100%);
-    }
-
-    .container {
-      text-align: center;
-      width: 96%;
-      max-width: (1200/20em);
-      margin: 0 auto;
-      @media only screen and(min-width: 768px) {
-        text-align: left;
-      }
-    }
-
-    h1 {
-      color: white;
-      font-weight: bold;
-      font-size: (49/20em);
-      margin-bottom: 0;
-    }
-  }
-</style>

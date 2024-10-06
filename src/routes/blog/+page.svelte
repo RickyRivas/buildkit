@@ -1,17 +1,22 @@
 <script>
   // Review CREATEABLOG.md for blog implementation
   // Components
-  import SubNavigation from "./../../lib/components/SubNavigation.svelte"
-  import SEO from "./../../lib/components/SEO.svelte"
+  import SubNavigation from "$lib/components/SubNavigation.svelte"
+  import SEO from "$lib/components/SEO.svelte"
   import { formatDate } from "$lib/utils"
 
   // logic
   import { business } from "$lib/config"
+  import { page } from "$app/stores"
   export let data
   const { posts } = data
 
   // mark most recent post
   if (posts[0]) posts[0].postData.latest = true
+
+  // logic
+  import { findPage } from "$lib/utils"
+  let thisPage = findPage(business, $page.route.id)
 </script>
 
 <SEO
@@ -27,7 +32,7 @@
   logo=""
   author=""
   name="" />
-<SubNavigation pageTitle="Our Blog" />
+<SubNavigation pageTitle={thisPage?.title} pagePath={thisPage.path} pageName={thisPage.name} />
 
 <main>
   <section id="blog-posts">

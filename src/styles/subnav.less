@@ -1,0 +1,81 @@
+ #subheader {
+     position: relative;
+     z-index: 400;
+     display: block;
+     background: #000 center / cover no-repeat;
+     text-align: left;
+     padding: 3em 0;
+     margin-top: 64px;
+
+     @media only screen and(min-width: 1024px) {
+         padding: 10em 0 5em;
+     }
+
+     &::before {
+         content: '';
+         .overlay;
+         background-color: fade(#000, 60%);
+         z-index: -1;
+     }
+
+     .subnav-subheading {
+         color: #fff;
+         .upp;
+         font-size: 16px;
+         .bold;
+         letter-spacing: .1em;
+         position: relative;
+         margin-left: 1em;
+         line-height: 4;
+
+         &::before {
+             content: '';
+             position: absolute;
+             top: 50%;
+             right: calc(100% + 1em);
+             transform: translateY(-50%);
+             width: 50vw;
+             height: 2px;
+             background-color: var(--primary);
+         }
+     }
+
+     h1 {
+         @fsparent: 20;
+         @fs: 48;
+         @lh: 50;
+         @ls: 0;
+
+         display: block;
+         .fs((@fs/@fsparent*1em));
+         .lh((@lh/@fs));
+         color: #fff;
+         margin: 0 0 (30/@fs*1em);
+
+         & when (@ls > 0) {
+             .ls((@ls/1000*1em));
+         }
+     }
+
+     .mod {
+         display: inline-flex;
+         justify-content: center;
+         align-items: center;
+         gap: (10/20em);
+
+         a {
+             color: #fff;
+
+             &.current-page {
+                 color: var(--primary-light)
+             }
+         }
+
+         .line {
+             .ib;
+             background-color: #fff;
+             width: (30/20em);
+             height: 2px;
+         }
+     }
+ }

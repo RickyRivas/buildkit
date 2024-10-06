@@ -18,21 +18,19 @@
   let activeTopLevelWithSubpages
 
   $: if ($page.url.pathname) {
-    // must reset
-    activeTopLevelWithSubpages = null
+    const currentPath = $page.url.pathname
 
-    let currentPath = $page.url.pathname
-    let isCurrentPageTopLevel = business.interiorPages.find((page) => page.path === currentPath)
+    // Check if current page is a top-level page
+    const isTopLevel = business.interiorPages.some((page) => page.path === currentPath)
 
-    if (!isCurrentPageTopLevel) {
-      const subpageGroups = business.interiorPages.filter((p) => p.subPages)
-      subpageGroups.forEach((group) => {
-        const foundPage = group.subPages?.find((subpage) => subpage.path === currentPath)
-        if (foundPage) activeTopLevelWithSubpages = group.name.toLowerCase()
-      })
-    } else {
-      // toggle off on page change
+    if (isTopLevel) {
       activeTopLevelWithSubpages = null
+    } else {
+      // Find the group containing the current subpage
+      activeTopLevelWithSubpages =
+        business.interiorPages
+          .find((group) => group.subPages?.some((subpage) => subpage.path === currentPath))
+          ?.name.toLowerCase() ?? null
     }
   }
 
@@ -78,6 +76,7 @@
               name.toLowerCase().replace(" ", "-").replace("-& ", "-") ===
                 activeTopLevelWithSubpages}
             on:click={(e) => {
+              // mobile toggle sub links
               if (window.innerWidth < 1023 && e.target.classList.contains("dropdown"))
                 e.target.classList.toggle("open")
             }}>
@@ -88,8 +87,6 @@
                 id={name.toLowerCase()}
                 on:click={(e) => {
                   e.target.parentElement.classList.toggle("open")
-
-                  // toggleNav()
                 }}>
                 {name}
               </a>
@@ -114,17 +111,6 @@
                           }, 330)
                         }
                         toggleNav()
-
-                        // focus on something else
-                        // tablet hover!
-                        // const parentUl = e.target.parentElement.parentElement
-                        // // make sure parentUl is an ul el
-                        // if (parentUl.tagName === "UL" && window.innerWidth > 1023) {
-                        //   parentUl.style.display = "none"
-                        //   setTimeout(() => {
-                        //     parentUl.removeAttribute("style")
-                        //   }, 500)
-                        // }
                       }}>{subPage.title}</a>
                   </li>
                 {/each}
@@ -136,13 +122,6 @@
             {/if}
           </li>
         {/each}
-        {#if business.includeBlog}
-          <li
-            class="nav-link"
-            class:active={$page.url.pathname === "/blog" || $page.url.pathname.startsWith("/blog")}>
-            <a href="/blog" on:click={toggleNav}>Blog</a>
-          </li>
-        {/if}
       </ul>
 
       <AnchorButton text="Contact Us" link="/contact" />
@@ -152,8 +131,6 @@
         method="POST"
         action="/?/switchTheme"
         use:enhance={({ cancel }) => {
-          // alert("theme toggle disabled until final color scheme chosen.")
-          // cancel()
           return function ({ result }) {
             const { newTheme } = result.data
             document.documentElement.dataset.theme = newTheme
