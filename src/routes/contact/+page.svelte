@@ -26,7 +26,7 @@
   let inProd = false
 
   function clearModal() {
-    if (success) clearFields()
+    // if (success) clearFields()
     message = ""
     showModal = false
     success = false
@@ -126,6 +126,7 @@
     respond to every call or email we get!
   </p>
   <form
+    bind:this={form}
     id="contact-form"
     method="post"
     name="contact"
