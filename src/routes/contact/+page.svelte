@@ -151,14 +151,16 @@
         body: formattedForUrl,
       })
 
+      console.log(formattedForUrl)
+
       // TODO: custom form success page
       if (response.ok) {
         message = "We have received your submission. Thank you."
         loading = false
         success = true
-        setTimeout(() => {
-          goto("/")
-        }, 3000)
+        // setTimeout(() => {
+        //   goto("/")
+        // }, 3000)
       }
       cancel()
     }}>
