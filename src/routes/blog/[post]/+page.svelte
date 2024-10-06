@@ -2,15 +2,17 @@
   // components
   import SEO from "$lib/components/SEO.svelte"
   import SubNavigation from "$lib/components/SubNavigation.svelte"
-
+  import InteriorLayout from "$lib/components/InteriorLayout.svelte"
   // Logic
   import { business } from "$lib/config"
   export let data
   const { author, date, description, imageAlt, tags, thumbnail, title } = data.postData
   const { path, Content } = data
+
+  let thisPage = business.interiorPages.find((page) => page.path === "/blog")
 </script>
 
-<SubNavigation pageTitle={title} />
+<SubNavigation pageTitle={title} pagePath={path} pageName={title} />
 <SEO
   {title}
   {description}
@@ -23,12 +25,8 @@
   openGraph={true}
   schemaOrg={false} />
 
-<main>
+<InteriorLayout bind:thisPage>
   <section id="blog-post">
-    <div class="container">
-      <div id="content">
-        <Content />
-      </div>
-    </div>
+    <Content />
   </section>
-</main>
+</InteriorLayout>
