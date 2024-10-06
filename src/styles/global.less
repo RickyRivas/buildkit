@@ -5,13 +5,77 @@
     margin: 0;
 }
 
-// Light mode styles
+// default theme css vars
 :root {
-    --primary-color: #ff541a;
-    --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    --toggleBg: #ffffff;
-    --toggleText: #000000;
-    --link-color: #ff541a;
+    // colors
+    --primary: #E59E6D;
+    --primary-light: #f9f3f3;
+    --secondary: #46643E;
+    --light-grey: rgba(0, 0, 0, .1);
+    --intermediate: #D6D2C4;
+    --tertiary: #E5E1E6;
+    --quaternary: #AFCDD7;
+
+    // text
+    --heading: #1A1A1A;
+    --text: #4E4B66;
+    --link: #3A5133;
+    // shadows
+    --box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    --box-shadow-lg: rgba(0, 0, 0, 0.1) 0px 10px 20px;
+    --light-box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    // section backgrounds
+    --bg: #fff;
+    --bg-alternate: #FAF8F7;
+    // header
+    --mainnav-bg: #fff;
+    --mainnav-link: var(--primary);
+    --mainnav-linkbg: var(--primary-light);
+    // padding
+    --padding-sm: 3em 0;
+    --padding-lg: 5em 0;
+    // border
+    --border-radius: .8em;
+    // forms
+    --form-bg: #fff;
+    --form-text: #4E4B66;
+    --form-field: #F7F7F7;
+    --form-borderradius: .2em;
+    --form-bordercolor: #ebebeb;
+    --form-placeholder: rgba(0, 0, 0, .5);
+    --form-field-success: #33C27F;
+    --form-field-success-bg: #e7f2ed;
+    --form-field-error: #d62828;
+    --form-field-error-bg: #ffdfdf;
+}
+
+// Dark theme css vars
+html[data-theme='dark'] {
+    --link: #8ead85;
+    // colors
+    --primary: #9b501c;
+    --light-grey: rgba(256, 256, 256, .1);
+    --intermediate: #615a43;
+    --tertiary: #605363;
+    --quaternary: #345b68;
+    // text
+    --heading: #fff;
+    --text: #fff;
+    // shadows
+    --box-shadow: none;
+    // section backgrounds
+    --bg: #25262c;
+    --bg-alternate: #000;
+    // header
+    --mainnav-bg: #222;
+    --mainnav-link: #fff;
+    --mainnav-linkbg: #404040;
+    // forms
+    --form-bg: #282828;
+    --form-text: #fff;
+    --form-field: #404040;
+    --form-bordercolor: rgba(256, 256, 256, .1);
+    --form-placeholder: rgba(256, 256, 256, .5)
 }
 
 @linkcolor: #ff541a;
@@ -47,13 +111,20 @@ input[type=number] {
 
 p {
     margin: 0 0 1.58em;
-    padding: 0
+    padding: 0;
+    line-height: 1.5;
+    font-size: 16px;
 }
 
 ol,
 ul {
     padding: 0;
-    margin: 0 0 1.58em 1.6em
+    margin: 0 0 1.58em 1.6em;
+
+    li {
+        font-size: 16px;
+        line-height: 1.5;
+    }
 }
 
 /* ===============================================
@@ -64,13 +135,13 @@ a {
     text-decoration: none;
 }
 
-#content a {
-    color: @linkcolor;
+#content a:not([class]) {
+    color: var(--link);
     transition: color 0.33s ease-in-out;
     text-decoration: underline;
 
     &:hover {
-        color: @headingcolor;
+        color: var(--text);
     }
 }
 
@@ -96,10 +167,15 @@ a {
 =============================================== */
 
 .container {
-    display: block;
-    width: 96%;
-    max-width: (1200/20em);
+    width: 90%;
+    max-width: (900/20em);
     margin: 0 auto;
+    position: relative;
+
+    @media only screen and (min-width: 1024px) {
+        max-width: (1298/20em);
+        width: 96%;
+    }
 }
 
 /* ===============================================
@@ -148,44 +224,118 @@ h6 {
 // base button
 
 .btn {
-    @parentfs: 20;
-    @fs: 15;
-    @lh: 50;
+    @fs: 16;
+    @lh: 56;
     @ls: 0;
     @height: 0;
-    @width: 150;
-    @br: 0;
-    @bc: @linkcolor;
-    @hoverbc: @headingcolor;
-    @borderstyle: false;
+    @width: 170;
+    @br: 6;
+    @bcOne: #ebebeb;
+    @bcTwo: var(--primary);
 
-    display: inline-block;
-    vertical-align: top;
-    text-align: center;
-    color: #fff;
-    font-size: (@fs/@parentfs*1em);
-    line-height: (@lh/@fs);
-    background-color: (@bc);
-    width: (@width/@fs*1em);
-    transition: background-color .33s ease, color .33s ease;
+    .fs(16px);
+    .ib;
+    .va(top);
+    text-align: right;
+    font: inherit;
+    font-size: 16px;
+    border: 0;
+    background: none;
+    .bold;
+    white-space: nowrap;
+    line-height: (@lh / @fs);
+    box-shadow: var(--light-box-shadow);
 
-    & when (@ls > 0) {
-        letter-spacing: (@ls/1000*1em);
+    .text {
+        // float: left;
+        .ib;
+        .va(top);
+        text-align: left;
+        color: #fff;
+        padding: 0 2.25em 0 1em;
+        background-color: @bcTwo;
+        border-top-left-radius: (@br / @fs*1em);
+        border-bottom-left-radius: (@br / @fs*1em);
+        margin-right: (-5/@fs*1em);
+        transition:
+            background-color 0.33s ease,
+            color 0.33s ease;
     }
 
-    & when (@br > 0) {
-        border-radius: (@br/@fs*1em);
+    .arrow {
+        .ib;
+        .va(top);
+        background-color: @bcOne;
+        width: (44em / @fs);
+        transition: background-color 0.33s ease,
+            color 0.33s ease;
+        position: relative;
+        z-index: 1;
+        border-top-right-radius: (@br / @fs*1em);
+        border-bottom-right-radius: (@br / @fs*1em);
+        overflow: hidden;
+        padding: 0 1em;
+        color: @bcTwo;
+
+        &::before {
+            content: "";
+            background-color: @bcTwo;
+            .overlay;
+            z-index: -1;
+            transition: transform 0.33s ease;
+            transform: translate3d(0, 0, 0) scaleY(0);
+            transform-origin: top;
+            border-top-right-radius: (@br / @fs*1em);
+            border-bottom-right-radius: (@br / @fs*1em);
+        }
     }
 
-    & when (@height > 0) {
-        height: @height/@fs*1em;
-    }
+    &:disabled {
+        cursor: not-allowed;
 
-    & when (@borderstyle) {
-        border: 1px solid @color1;
+        .text {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .arrow {
+            color: #000;
+
+            &::before {
+                content: none;
+            }
+        }
+
+        &:hover {
+            .text {
+                background-color: #000;
+                color: #fff;
+            }
+
+            .arrow {
+                color: #000;
+                background-color: @bcOne;
+
+                &::before {
+                    content: none;
+                }
+            }
+        }
     }
 
     &:hover {
-        background-color: (@hoverbc);
+        .text {
+            background-color: @bcOne;
+            color: @bcTwo;
+        }
+
+        .arrow {
+            color: @bcOne;
+            background-color: @bcTwo;
+
+            &::before {
+                transform: translate3d(0, 0, 0) scaleY(1);
+            }
+        }
     }
 }

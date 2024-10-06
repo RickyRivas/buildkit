@@ -12,8 +12,73 @@
     display: inline-block;
 }
 
+.va(@alignment) {
+    vertical-align: @alignment;
+}
+
 .flexcenter {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.buttonreset {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+}
+
+.round {
+    border-radius: 50%;
+}
+
+.lt {
+    font-weight: 300;
+}
+
+.reg {
+    font-weight: 400;
+}
+
+.mbold {
+    font-weight: 500;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+
+/*LETTER SPACING, LINE HEIGHT AND FONT SIZE */
+.ls(@spacing) {
+    letter-spacing: @spacing;
+}
+
+.lh(@val) {
+    line-height: @val;
+}
+
+.fs(@val) {
+    font-size: @val;
+}
+
+.aligncenter {
+    text-align: center;
+}
+
+.alignright {
+    text-align: right;
+}
+
+.alignleft {
+    text-align: left;
+}
+
+.justify {
+    text-align: justify;
+}
+
+.upp {
+    text-transform: uppercase;
 }
