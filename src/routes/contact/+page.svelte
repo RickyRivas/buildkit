@@ -129,6 +129,8 @@
     id="contact-form"
     method="post"
     name="contact"
+    action="/"
+    enctype="multipart/form-data"
     use:enhance={async ({ cancel }) => {
       showModal = true
       loading = true
