@@ -5,6 +5,7 @@
   // stores
   import { business } from "$lib/config"
   import { onMount } from "svelte"
+  import { browser } from "$app/environment"
 
   onMount(() => {
     // Netlify blog invite redirect
@@ -30,16 +31,25 @@
   name="" />
 
 <main>
-  <section id="landing">
-    <div class="content">
-      <span>Made with Sveltekit</span>
-      <h1>Web development,<br /> streamlined</h1>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates adipisci et magni
-        laborum, voluptatibus omnis soluta numquam neque eaque inventore.
-      </p>
-      <a href="/" class="cta">Read the docs</a>
+  <section id="slideshow">
+    <video
+      id="welcomevid"
+      class="welcomevid lazyload"
+      preload="none"
+      poster="/video/poster.jpg"
+      autoplay
+      loop
+      muted
+      playsinline>
+      <!-- uncomment if video -->
+      <!-- {#if browser && window.innerWidth > 1299}
+        <source type="video/mp4" src="/video/welcome.mp4" />
+      {:else if browser && window.innerWidth < 1299}
+        <source type="video/mp4" src="/video/welcome-small.mp4" />
+      {/if} -->
+    </video>
+    <div class="ssoverlay">
+      <div class="slogan">onwards & upwards</div>
     </div>
-    <img class="hero" src="/img01.jpg" alt="laptop" width="500" height="610" decoding="async" />
   </section>
 </main>

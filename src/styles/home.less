@@ -1,90 +1,85 @@
-#landing {
-    display: block;
-    background-color: #f4f4f4;
-    position: relative;
+@slideshowstyle: 'video';
+@slideshowheight: 800;
+
+#slideshow {
+    // font-size: 1.7vw;
     text-align: center;
-    padding: 3em 0;
-    isolation: isolate;
+    color: #fff;
+    min-height: 51vw;
+    background: #000; //UI ghost element
+    position: relative;
+    z-index: 400;
+    margin-top: 64px;
 
-    .content {
-        width: 96%;
-        max-width: (580/20em);
-        text-align: left;
-        display: inline-block;
-        vertical-align: middle;
-        margin: 0 auto 3em;
-
-        span {
-            background-color: #212121;
-            border-radius: .5em;
-            padding: .5em 1em;
-            color: white;
-            display: block;
-            width: max-content;
-            text-transform: uppercase;
-            letter-spacing: .05em;
-            font-size: (15/20em);
-            margin-bottom: (40/15em);
-        }
-
-        h1 {
-            font-size: (72/20em);
-            margin: 0 0 (30/72em) 0;
-            text-transform: capitalize;
-            line-height: 1;
-        }
-
-        p {
-            margin: 0 0 (40/20em) 0;
-        }
-
-        .cta {
-            display: inline-block;
-            vertical-align: middle;
-            width: auto;
-            text-decoration: none;
-            background-color: var(--primary-color);
-            padding: .75em 2em;
-            border-radius: .5em;
-            color: white;
-            transition: background-color .33s ease;
-
-            &:hover {
-                background-color: #212121;
-            }
-        }
-    }
-
-    .hero {
-        width: 80%;
-        max-width: (500/20em);
-        height: auto;
-        display: inline-block;
-        vertical-align: middle;
-        border-radius: .5em;
-    }
-
-    @media only screen and (min-width: 768px) {
-        font-size: 1.7vw;
-        padding: 6em 0;
-
-        &::before {
-            content: '';
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: calc(50% + 16em);
-            background-color: var(--primary-color);
-            height: 100%;
-            z-index: -1;
-        }
-
-        .content {
-            margin: 0 3em 0 0;
-        }
+    &::before {
+        content: '';
+        .overlay;
+        background-color: fade(#000, 10%);
+        z-index: 100;
     }
 
     @media only screen and (min-width: 1024px) {
         font-size: inherit;
+        width: 100%;
+        margin-top: 0;
+        top: 0;
+        /* maxTab 1024w */
+    }
+
+    @media only screen and (min-width: 1300px) and (max-width: 1999px) {
+        min-height: @slideshowheight*1px; //video reflects 'full bloom' dimensions
+        /* range 1300w - 1999oo */
+    }
+
+    .welcomevid {
+        width: 100%;
+        vertical-align: top;
+        aspect-ratio: ~'16 / 9'; //reduces cls
+
+        //uncomment below for parallax video - dont't forget to uncomment local.js parallax code
+        @media only screen and (min-width: 1300px) {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        @media only screen and (min-width: 1300px) and (max-width: 1999px) {
+            width: 2000px;
+            margin: 0 ~'calc(-1000px + 50vw)'; //video reflects 'full bloom' dimensions 
+            /* range 1300w - 1999oo */
+        }
+
+        &[poster] {
+            object-fit: cover;
+        }
+    }
+
+    .ssoverlay {
+        position: absolute;
+        z-index: 777;
+        left: 0;
+        width: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        display: block;
+
+        @media only screen and (min-width: 1024px) {
+            top: 55%;
+        }
+
+        @media only screen and (min-width: 1300px) {
+            transform: none;
+            top: 60%;
+        }
+
+        .slogan {
+            @fs: 40; //font-size
+            @lh: 44; //line-height
+
+            display: block;
+            line-height: (@lh/@fs);
+            .fs(~'clamp( 12px,'(@fs/20em) ~','(@fs*1px) ~')');
+        }
     }
 }
