@@ -29,6 +29,24 @@
   logo=""
   author=""
   name="" />
+<svelte:head>
+  <!-- <link rel="preload" as="image" href="/assets/images/slideshow/hero.jpg" media="(min-width: 768px)"
+        fetchpriority="high"> -->
+  <!-- <link
+    rel="preload"
+    as="video"
+    type="video/mp4"
+    media="(max-width: 1023px)"
+    href="/assets/video/welcome-small.mp4"
+    fetchpriority="high" />
+  <link
+    rel="preload"
+    as="video"
+    type="video/mp4"
+    media="(min-width: 1024px)"
+    href="/assets/video/welcome.mp4"
+    fetchpriority="high" /> -->
+</svelte:head>
 
 <main>
   <section id="slideshow">
